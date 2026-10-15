@@ -9,9 +9,9 @@ from enum import Enum
 
 class Side(Enum):
 
-    LEFT
+    LEFT = 1
 
-    RIGHT
+    RIGHT = 2
 
 
 # ˅
