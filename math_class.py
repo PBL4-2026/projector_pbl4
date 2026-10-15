@@ -14,32 +14,38 @@ class MathClass(object):
     
     # ˄
 
-    def overlapCm(self, w, d):
+    @classmethod
+    def overlapCm(cls, w, d):
         # ˅
         pass
         # ˄
 
-    def totalWidthCm(self, w, d):
+    @classmethod
+    def totalWidthCm(cls, w, d):
         # ˅
         pass
         # ˄
 
-    def pxPerCm(self, resX, w):
+    @classmethod
+    def pxPerCm(cls, resX, w):
         # ˅
         pass
         # ˄
 
-    def overlapPx(self, resX, w, d):
+    @classmethod
+    def overlapPx(cls, resX, w, d):
         # ˅
         pass
         # ˄
 
-    def cropRegion(self, projectorSide, resX, w, d):
+    @classmethod
+    def cropRegion(cls, projectorSide, resX, w, d):
         # ˅
         pass
         # ˄
 
-    def blendMask(self, overlapPx, resX, projectorSide, gamma):
+    @classmethod
+    def blendMask(cls, overlapPx, resX, projectorSide, gamma):
         # ˅
         pass
         # ˄

@@ -38,6 +38,11 @@ class PipelineClass(object):
         pass
         # ˄
 
+    def scaleSource(self):
+        # ˅
+        pass
+        # ˄
+
     def __init__(self):
 
         self.__setup = None
