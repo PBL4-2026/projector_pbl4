@@ -23,12 +23,12 @@ class PipelineClass(object):
         pass
         # ˄
 
-    def applyMask(self, slices):
+    def applyMask(self, sliceFrame):
         # ˅
         pass
         # ˄
 
-    def display(self, frames):
+    def display(self, frame):
         # ˅
         pass
         # ˄
@@ -51,13 +51,9 @@ class PipelineClass(object):
 
         self.__sourceFrame = None
 
-        self.__masks = []
+        self.__mask = None
 
-        self.__outputs = []
-
-        self.__setupClass = None
-
-        self.__mathClass = None
+        self.__output = None
 
         # ˅
         pass
