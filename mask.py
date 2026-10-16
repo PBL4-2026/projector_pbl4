@@ -15,7 +15,7 @@ class Mask(object):
         pass
         # ˄
 
-    def __init__(self):
+    def __init__(self, alpha):
 
         self.__alpha = None
 

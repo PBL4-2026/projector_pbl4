@@ -20,7 +20,7 @@ class Region(object):
         pass
         # ˄
 
-    def __init__(self):
+    def __init__(self, xStartPx, widthPx):
 
         self.__xStartPx = None
 

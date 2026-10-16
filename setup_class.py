@@ -45,6 +45,11 @@ class SetupClass(object):
         pass
         # ˄
 
+    def getProjectorSide(self):
+        # ˅
+        pass
+        # ˄
+
     def __init__(self):
 
         self.__projectorResXY = None
@@ -56,6 +61,8 @@ class SetupClass(object):
         self.__blendCurveGamma = None
 
         self.__sourcePath = None
+
+        self.__projectorSide = None
 
         # ˅
         pass
