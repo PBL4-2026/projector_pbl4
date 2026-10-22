@@ -6,14 +6,7 @@ import logging
 import math
 import os
 
-try:
-    from side import Side
-except ImportError:
-    from enum import Enum
-
-    class Side(Enum):
-        LEFT = 1
-        RIGHT = 2
+from side import Side
 
 _log = logging.getLogger(__name__)
 
@@ -21,6 +14,8 @@ _KEY_RES = "projectorResXY"
 _KEY_WIDTH = "imageWidthCm"
 _KEY_SPACING = "projectorSpacingCm"
 _KEY_GAMMA = "blendCurveGamma"
+_GAMMA_MIN = 0.5   # placeholder, not decided
+_GAMMA_MAX = 3.0   # placeholder, not decided
 _KEY_SOURCE = "sourcePath"
 _KEY_SIDE = "projectorSide"
 # ˄
@@ -53,8 +48,11 @@ class SetupClass(object):
         spacing = self.__toFloat(_KEY_SPACING, data[_KEY_SPACING])
         gamma = self.__toFloat(_KEY_GAMMA, data[_KEY_GAMMA])
         source = data[_KEY_SOURCE]
-        if not isinstance(source, str):
-            raise ValueError("Setting '%s' must be a string (file path), got %r" % (_KEY_SOURCE, source))
+        if not isinstance(source, str) or not source.strip():
+            raise ValueError("Setting '%s' must be a non-empty string (file path), got %r" % (_KEY_SOURCE, source))
+        source = os.path.expanduser(source)
+        if not os.path.isabs(source):
+            source = os.path.join(os.path.dirname(os.path.abspath(path)), source)
         side = self.__toSide(data[_KEY_SIDE])
 
         self.__projectorResXY = res
@@ -84,9 +82,10 @@ class SetupClass(object):
             return self.__fail("%s (%s cm) must be smaller than %s (%s cm), otherwise the projectors do not overlap"
                                % (_KEY_SPACING, d, _KEY_WIDTH, w))
 
-        if not self.__isPositiveNumber(self.__blendCurveGamma):
-            return self.__fail("%s must be a positive number, got %r" % (_KEY_GAMMA, self.__blendCurveGamma))
-
+        g = self.__blendCurveGamma
+        if not self.__isPositiveNumber(g) or not (_GAMMA_MIN <= g <= _GAMMA_MAX):
+            return self.__fail("%s must be between %s and %s, got %r" % (_KEY_GAMMA, _GAMMA_MIN, _GAMMA_MAX, g))
+        
         src = self.__sourcePath
         if not isinstance(src, str) or not src.strip():
             return self.__fail("%s must be a non-empty path, got %r" % (_KEY_SOURCE, src))
@@ -156,17 +155,14 @@ class SetupClass(object):
 
     @staticmethod
     def __fail(message):
-        _log.warning("Invalid settings: %s", message)
+        _log.error("Invalid settings: %s", message)
         return False
 
     @staticmethod
     def __toFloat(name, value):
-        if isinstance(value, bool):
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
             raise ValueError("Setting '%s' must be a number, got %r" % (name, value))
-        try:
-            return float(value)
-        except (TypeError, ValueError):
-            raise ValueError("Setting '%s' must be a number, got %r" % (name, value))
+        return float(value)
 
     @staticmethod
     def __toResolution(value):
