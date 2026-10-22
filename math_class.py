@@ -77,7 +77,21 @@ class MathClass(object):
     @classmethod
     def blendMask(cls, overlapPx, resX, projectorSide, gamma):
         # ˅
-        pass
+        if not isinstance(projectorSide, Side):
+            raise ValueError(f"projectorSide must be a Side, got {projectorSide!r}")
+        if not 0 < overlapPx < resX:
+            raise ValueError(f"overlapPx must satisfy 0 < overlapPx < resX, got {overlapPx}")
+        if gamma <= 0:
+            raise ValueError(f"gamma must be greater than 0, got {gamma}")
+        # t is the centre of overlap column i, as a fraction of the overlap.
+        ts = [(i + 0.5) / overlapPx for i in range(overlapPx)]
+        if projectorSide is Side.LEFT:
+            fade = [(1.0 - t) ** (1.0 / gamma) for t in ts]
+            alpha = [1.0] * (resX - overlapPx) + fade
+        else:
+            fade = [t ** (1.0 / gamma) for t in ts]
+            alpha = fade + [1.0] * (resX - overlapPx)
+        return Mask(alpha)
         # ˄
 
     # ˅
