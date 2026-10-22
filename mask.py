@@ -6,15 +6,21 @@
 
 class Mask(object):
     """!
-    @brief a
+    @brief The brightness multipliers for one projector
 
     """
 
     # ˅
     
     # ˄
-
+    
+    @classmethod
     def getAlpha(self):
+        
+        """!
+        @brief 
+        """
+
         # ˅
         pass
         # ˄
