@@ -12,7 +12,7 @@ class Mask(object):
 
     def getAlpha(self):
         # ˅
-        pass
+        return self.__alpha
         # ˄
 
     def __init__(self, alpha):
@@ -20,7 +20,7 @@ class Mask(object):
         self.__alpha = None
 
         # ˅
-        pass
+        self.__alpha = alpha
         # ˄
 
     # ˅
