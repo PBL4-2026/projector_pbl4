@@ -6,7 +6,7 @@
 
 class Mask(object):
     """!
-    @brief 
+    @brief a
 
     """
 
