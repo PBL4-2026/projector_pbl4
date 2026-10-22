@@ -12,12 +12,12 @@ class Region(object):
 
     def getXStartPx(self):
         # ˅
-        pass
+        return self.__xStartPx
         # ˄
 
     def getWidthPx(self):
         # ˅
-        pass
+        return self.__widthPx
         # ˄
 
     def __init__(self, xStartPx, widthPx):
@@ -27,7 +27,8 @@ class Region(object):
         self.__widthPx = None
 
         # ˅
-        pass
+        self.__xStartPx = xStartPx
+        self.__widthPx = widthPx
         # ˄
 
     # ˅

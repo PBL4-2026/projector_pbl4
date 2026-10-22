@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ˅
+import math
+
 from mask import Mask
 from region import Region
 from side import Side
@@ -53,13 +55,23 @@ class MathClass(object):
     @classmethod
     def overlapPx(cls, resX, w, d):
         # ˅
-        pass
+        # Round half up (not Python round(), which rounds halves to even).
+        # This is the only place the overlap is rounded, so both computers agree.
+        px = math.floor(cls.overlapCm(w, d) * cls.pxPerCm(resX, w) + 0.5)
+        if px < 1 or px >= resX:
+            raise ValueError(f"overlapPx must be in [1, resX), got {px} (resX={resX})")
+        return int(px)
         # ˄
 
     @classmethod
     def cropRegion(cls, projectorSide, resX, w, d):
         # ˅
-        pass
+        if not isinstance(projectorSide, Side):
+            raise ValueError(f"projectorSide must be a Side, got {projectorSide!r}")
+        overlap = cls.overlapPx(resX, w, d)
+        if projectorSide is Side.LEFT:
+            return Region(0, resX)
+        return Region(resX - overlap, resX)
         # ˄
 
     @classmethod
