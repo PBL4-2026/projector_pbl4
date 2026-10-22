@@ -4,8 +4,12 @@
 
 # ˄
 
-
 class Mask(object):
+    """!
+    @brief 
+
+    """
+
     # ˅
     
     # ˄
