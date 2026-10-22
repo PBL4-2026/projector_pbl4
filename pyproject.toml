@@ -6,3 +6,11 @@ dependencies = [
     "numpy>=2.5.4",
     "opencv-python>=5.0.0.93",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.uv]
+package = false
