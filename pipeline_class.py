@@ -15,6 +15,9 @@ class PipelineClass(object):
 
     def load(self):
         # ˅
+        """!
+        @brief Load the source frame and mask from the setup class.
+        """
         pass
         # ˄
 
