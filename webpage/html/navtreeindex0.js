@@ -1,0 +1,22 @@
+var NAVTREEINDEX0 =
+{
+"annotated.html":[1,0],
+"classdisplay_1_1_display.html":[1,0,0,0],
+"classes.html":[1,1],
+"classimage_1_1_image.html":[1,0,1,0],
+"classmask_1_1_mask.html":[1,0,2,0],
+"classmath__class_1_1_math_class.html":[1,0,3,0],
+"classpipeline__class_1_1_pipeline_class.html":[1,0,4,0],
+"classregion_1_1_region.html":[1,0,5,0],
+"classsetup__class_1_1_setup_class.html":[1,0,6,0],
+"classside_1_1_side.html":[1,0,7,0],
+"hierarchy.html":[1,2],
+"index.html":[],
+"index.html":[0],
+"index.html#autotoc_md0":[0,0],
+"index.html#autotoc_md1":[0,1],
+"index.html#autotoc_md2":[0,2],
+"index.html#autotoc_md3":[0,3],
+"index.html#autotoc_md4":[0,4],
+"pages.html":[]
+};
