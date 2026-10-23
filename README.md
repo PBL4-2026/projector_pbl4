@@ -158,6 +158,23 @@ Run `deactivate` to leave the virtual environment.
 > [!NOTE]
 > The modules are generated from a UML model. Keep the `# ˅` / `# ˄` markers and write your code between them so it is kept when the code is regenerated.
 
+## Smoke test: full-screen on a chosen screen
+
+`display.py` has a manual smoke test at the bottom of the file. It writes a
+generated test picture to `images/sample.jpg`, loads it back through
+`Image.load`, and shows it full-screen:
+
+```bash
+uv run python display.py
+```
+
+Press `q` or `ESC` to quit; the window also closes by itself after 30 s, so the
+run can never hang unattended.
+
+Edit the `screens` list inside the smoke test to match your desk layout — each
+entry is `(x, y, width, height)` in **logical** pixels, and index 0 is the
+monitor to show on.
+
 ## License
 
 See [LICENSE](LICENSE).
