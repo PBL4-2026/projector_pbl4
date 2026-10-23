@@ -1,7 +1,8 @@
-"""Display クラスのロジックのテスト。GUI ウィンドウは一切開かない。
+"""Tests for the logic of the Display class. No GUI window is ever opened.
 
-show() の検証エラー経路だけを触り、cv2.namedWindow / cv2.imshow / cv2.waitKey /
-cv2.destroyWindow は呼ばない（ウィンドウが無い状態で失敗することを確認する）。
+Only the validation error paths of show() are exercised; cv2.namedWindow /
+cv2.imshow / cv2.waitKey / cv2.destroyWindow are never called (the tests confirm
+that the calls fail while no window exists).
 """
 import pytest
 
@@ -11,7 +12,7 @@ SCREENS = [(0, 0, 1920, 1080), (1920, 0, 1280, 720)]
 
 
 def state(display):
-    """テスト専用: private 属性を直接のぞく（公開 API を増やさないため）。"""
+    """Test-only: peek at private attributes directly (to avoid growing the public API)."""
     return {
         "windowOpen": display._Display__windowOpen,
         "fullscreen": display._Display__fullscreen,
@@ -37,7 +38,7 @@ class TestConstructor:
         assert state(display)["screen"] == 1
 
     def test_accepts_list_entries_and_tuple_container(self):
-        # (list, tuple) のどちらでも受け、内部ではタプルに正規化する
+        # Accepts either (list, tuple) entries and normalises them to tuples internally
         display = Display(screens=((0, 0, 800, 600), [800, 0, 800, 600]))
         assert state(display)["screens"] == [(0, 0, 800, 600), (800, 0, 800, 600)]
 
@@ -98,9 +99,9 @@ class TestSetScreen:
         display = Display(screens=SCREENS)
         with pytest.raises(IndexError) as excinfo:
             display.setScreen(index)
-        # メッセージに設定済みモニタ数を出す
+        # The message reports the number of configured monitors
         assert "2" in str(excinfo.value)
-        # 失敗しても以前の選択は保たれる
+        # A failure keeps the previous selection
         assert state(display)["screen"] == 0
 
     def test_without_screens_raises(self):
@@ -143,7 +144,7 @@ class TestShowValidation:
         display = Display(screens=SCREENS)
         with pytest.raises(ValueError):
             display.show(frame)
-        # 検証が先に走り、ウィンドウは生成されていない
+        # Validation runs first, so no window has been created
         assert state(display)["windowOpen"] is False
 
     def test_non_ndarray_frame_does_not_create_window(self):

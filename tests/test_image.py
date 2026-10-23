@@ -1,4 +1,4 @@
-"""Image クラス（cv2.imread のラッパー）のテスト。GUI ウィンドウは一切開かない。"""
+"""Tests for the Image class (a wrapper around cv2.imread). No GUI window is ever opened."""
 import cv2
 import numpy as np
 import pytest
@@ -11,10 +11,10 @@ WIDTH = 32
 
 @pytest.fixture()
 def sample_path(tmp_path):
-    """緑一色の PNG を書き出し、そのパスを返す。"""
+    """Write an all-green PNG and return its path."""
     path = tmp_path / "sample.png"
     frame = np.zeros((HEIGHT, WIDTH, 3), dtype=np.uint8)
-    frame[:, :, 1] = 255  # BGR の G だけを立てる
+    frame[:, :, 1] = 255  # Set only G in BGR
     assert cv2.imwrite(str(path), frame) is True
     return path
 
@@ -31,7 +31,7 @@ class TestLoad:
         assert frame.shape == (HEIGHT, WIDTH, 3)
 
     def test_reads_bgr_channels(self, sample_path):
-        # 緑で書いた画像は G=255 / B=R=0 として読める（BGR の確認）
+        # An image written as green reads back as G=255 / B=R=0 (BGR check)
         frame = Image().load(str(sample_path))
         blue, green, red = frame[0, 0]
         assert (int(blue), int(green), int(red)) == (0, 255, 0)
@@ -43,7 +43,7 @@ class TestLoad:
         assert str(missing) in str(excinfo.value)
 
     def test_directory_raises(self, tmp_path):
-        # 存在するがファイルではない -> FileNotFoundError
+        # Exists but is not a file -> FileNotFoundError
         with pytest.raises(FileNotFoundError) as excinfo:
             Image().load(str(tmp_path))
         assert str(tmp_path) in str(excinfo.value)

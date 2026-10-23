@@ -1,4 +1,4 @@
-"""MathClass の overlapCm / totalWidthCm / pxPerCm のテスト（手計算の値で検証）。"""
+"""Tests for MathClass overlapCm / totalWidthCm / pxPerCm (checked against hand-calculated values)."""
 import pytest
 
 from math_class import MathClass
@@ -14,7 +14,7 @@ class TestOverlapCm:
         assert MathClass.overlapCm(100.5, 80) == pytest.approx(20.5)
 
     def test_no_overlap(self):
-        # w == d -> 重なりなし
+        # w == d -> no overlap
         assert MathClass.overlapCm(80, 80) == pytest.approx(0.0)
 
     def test_returns_float(self):
@@ -34,7 +34,7 @@ class TestTotalWidthCm:
         assert isinstance(MathClass.totalWidthCm(120, 80), float)
 
     def test_consistent_with_overlap(self):
-        # W = 2w - o が成り立つ
+        # W = 2w - o holds
         w, d = 120, 80
         assert MathClass.totalWidthCm(w, d) == pytest.approx(
             2 * w - MathClass.overlapCm(w, d)

@@ -15,12 +15,12 @@ class Image(object):
 
     def load(self, path):
         # ˅
-        """path の画像を BGR（cv2.IMREAD_COLOR）で読み込み、numpy.ndarray として返す。
+        """Load the image at path in BGR (cv2.IMREAD_COLOR) and return it as a numpy.ndarray.
 
-        path: 画像ファイルのパス
-        読み込んだフレームは内部にも保持し、getFrame() / getShape() で参照できる。
-        ファイルが存在しない、またはファイルでない場合は FileNotFoundError、
-        画像として読み込めない場合は ValueError を送出する。
+        path: path to the image file
+        The loaded frame is also kept internally and can be read via getFrame() / getShape().
+        Raises FileNotFoundError if the file does not exist or is not a file, and
+        ValueError if it cannot be read as an image.
         """
         if not isinstance(path, str) or not path.strip():
             raise ValueError(f"path must be a non-empty string, got {path!r}")
@@ -43,15 +43,15 @@ class Image(object):
 
     def getFrame(self):
         # ˅
-        """読み込み済みのフレームを返す。load() をまだ呼んでいなければ None を返す。"""
+        """Return the loaded frame, or None if load() has not been called yet."""
         return self.__frame
         # ˄
 
     def getShape(self):
         # ˅
-        """読み込み済みのフレームの (height, width, channels) を返す。
+        """Return (height, width, channels) of the loaded frame.
 
-        load() をまだ呼んでいない場合は ValueError を送出する。
+        Raises ValueError if load() has not been called yet.
         """
         if self.__frame is None:
             raise ValueError("No frame is loaded: call load() first")

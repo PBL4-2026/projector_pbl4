@@ -13,20 +13,20 @@ class Display(object):
 
     def setScreen(self, index):
         # ˅
-        """投影先のモニタを index で選び、その番号を保持する。
+        """Select the target monitor by index and remember that number.
 
-        index: screens のインデックス（0 が主モニタ）
-        screens が未設定、または範囲外の場合は IndexError を送出する。
+        index: index into screens (0 is the primary monitor)
+        Raises IndexError if screens is not configured or the index is out of range.
         """
         self.__screen = self.__resolveIndex(index)
         # ˄
 
     def setFullscreen(self, enabled=True):
         # ˅
-        """フルスクリーン表示の希望状態を設定し、ウィンドウが存在すれば即座に適用する。
+        """Set the desired fullscreen state and apply it immediately if a window exists.
 
-        enabled: True でフルスクリーン、False で通常ウィンドウ
-        ウィンドウ生成前に呼ぶと RuntimeError を送出する。
+        enabled: True for fullscreen, False for a normal window
+        Raises RuntimeError if called before the window is created.
         """
         if not self.__windowOpen:
             raise RuntimeError(
@@ -43,17 +43,17 @@ class Display(object):
 
     def isFullscreen(self):
         # ˅
-        """フルスクリーン表示の希望状態を返す。"""
+        """Return the desired fullscreen state."""
         return self.__fullscreen
         # ˄
 
     def show(self, frame):
         # ˅
-        """フレームをウィンドウに表示する。最初の呼び出しでウィンドウを生成する。
+        """Show a frame in the window. The first call creates the window.
 
-        frame: 表示する画像（numpy.ndarray）
-        screens が設定されていれば、選択中のモニタ位置へ移動しリサイズする。
-        フレームが numpy.ndarray でない場合は ValueError を送出する。
+        frame: image to display (numpy.ndarray)
+        If screens is configured, move and resize the window to the selected monitor.
+        Raises ValueError if frame is not a numpy.ndarray.
         """
         if not isinstance(frame, np.ndarray):
             raise ValueError(
@@ -76,16 +76,16 @@ class Display(object):
 
     def waitKey(self, delayMs=0):
         # ˅
-        """delayMs ミリ秒キー入力を待ち、押されたキーのコードを返す（入力なしは -1）。
+        """Wait delayMs milliseconds for a key press and return the key code (-1 if none).
 
-        delayMs: 待ち時間 [ms]。0 は無期限に待つ。
+        delayMs: wait time [ms]. 0 waits indefinitely.
         """
         return cv2.waitKey(delayMs)
         # ˄
 
     def close(self):
         # ˅
-        """ウィンドウを破棄する。ウィンドウが無い、または 2 回目以降の呼び出しは何もしない。"""
+        """Destroy the window. Does nothing if there is no window or on calls after the first."""
         if not self.__windowOpen:
             return
         cv2.destroyWindow(self.__windowName)
@@ -110,7 +110,7 @@ class Display(object):
         self.__windowOpen = False
         self.__fullscreen = False
         if self.__screens is None:
-            # 配置先が未設定なので番号は検証せず保持するだけにする。
+            # Placement is not configured, so keep the number without validating it.
             self.__screen = Display.__validateIndexType(screen)
         else:
             self.setScreen(screen)
@@ -214,7 +214,7 @@ if __name__ == "__main__":
     screens = [(0, 0, 1920, 1080)]
 
     def buildTestImage(width=1280, height=720):
-        """色バーとチェッカー模様に文字を重ねた確認用フレーム（BGR）を作る。"""
+        """Build a test frame (BGR) with text overlaid on colour bars and a checker pattern."""
         upperHeight = height // 2
         lowerHeight = height - upperHeight
 
