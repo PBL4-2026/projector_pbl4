@@ -19,11 +19,11 @@ class MathClass(object):
     @classmethod
     def overlapCm(cls, w, d):
         # ˅
-        """2台の投影が重なる幅 o = w - d [cm] を返す。
+        """Return the width o = w - d [cm] where the two projections overlap.
 
-        w: 1台あたりの投影幅 [cm]
-        d: 2台のプロジェクター間隔 [cm]
-        w > d の検証は SetupClass.validate() が担当する。
+        w: projected width of one projector [cm]
+        d: distance between the two projectors [cm]
+        Validation of w > d is handled by SetupClass.validate().
         """
         return float(w) - float(d)
         # ˄
@@ -31,10 +31,10 @@ class MathClass(object):
     @classmethod
     def totalWidthCm(cls, w, d):
         # ˅
-        """2台を合わせた投影全体の幅 W = w + d [cm] を返す。
+        """Return the total projected width W = w + d [cm] of both projectors.
 
-        w: 1台あたりの投影幅 [cm]
-        d: 2台のプロジェクター間隔 [cm]
+        w: projected width of one projector [cm]
+        d: distance between the two projectors [cm]
         """
         return float(w) + float(d)
         # ˄
@@ -42,10 +42,10 @@ class MathClass(object):
     @classmethod
     def pxPerCm(cls, resX, w):
         # ˅
-        """投影面 1cm あたりのピクセル数 resX / w [px/cm] を返す。
+        """Return the number of pixels per 1 cm of projected surface, resX / w [px/cm].
 
-        resX: プロジェクターの横解像度 [px]
-        w: 1台あたりの投影幅 [cm]（0 より大きいこと）
+        resX: horizontal resolution of the projector [px]
+        w: projected width of one projector [cm] (must be greater than 0)
         """
         if w <= 0:
             raise ValueError(f"w must be greater than 0, got {w}")
