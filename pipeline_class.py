@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ˅
+import logging
+
+import cv2
+
 from math_class import MathClass
 from setup_class import SetupClass
 
+_log = logging.getLogger(__name__)
 
 # ˄
 
@@ -40,7 +45,23 @@ class PipelineClass(object):
 
     def scaleSource(self):
         # ˅
-        pass
+        src = self.__sourceFrame
+        if src is None:
+            raise ValueError("No source frame: call load() first")
+        resX, resY = self.__setup.getProjectorResXY()
+        overlapPx = self.__math.overlapPx(
+            resX, self.__setup.getImageWidthCm(), self.__setup.getProjectorSpacingCm())
+        # Combined image: both projectors side by side, minus the shared overlap.
+        dstW, dstH = 2 * resX - overlapPx, resY
+        srcH, srcW = src.shape[:2]
+        # The picture is stretched to the target size; warn when that distorts it.
+        if abs(srcW / srcH - dstW / dstH) / (dstW / dstH) > 0.01:
+            _log.warning(
+                "Source aspect ratio %.3f differs from target %.3f by more than 1%%; "
+                "the picture will be stretched", srcW / srcH, dstW / dstH)
+        interpolation = cv2.INTER_AREA if dstW * dstH < srcW * srcH else cv2.INTER_LINEAR
+        self.__sourceFrame = cv2.resize(src, (dstW, dstH), interpolation=interpolation)
+        return self.__sourceFrame
         # ˄
 
     def __init__(self):
