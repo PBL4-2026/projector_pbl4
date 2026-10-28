@@ -4,6 +4,7 @@
 import logging
 
 import cv2
+import numpy as np
 
 from math_class import MathClass
 from setup_class import SetupClass
@@ -30,7 +31,17 @@ class PipelineClass(object):
 
     def applyMask(self, sliceFrame):
         # ˅
-        pass
+        if self.__mask is None:
+            raise ValueError("No mask: the mask must be built before applyMask()")
+        # The mask is built once elsewhere and only read here.
+        alpha = np.asarray(self.__mask.getAlpha(), dtype=np.float64)
+        if sliceFrame.shape[1] != alpha.shape[0]:
+            raise ValueError(
+                f"Slice width {sliceFrame.shape[1]} does not match mask length {alpha.shape[0]}")
+        # One multiplier per column, broadcast over rows and colour channels.
+        scale = alpha.reshape((1, -1) + (1,) * (sliceFrame.ndim - 2))
+        out = np.rint(sliceFrame.astype(np.float64) * scale)
+        return np.clip(out, 0, 255).astype(np.uint8)
         # ˄
 
     def display(self, frame):
