@@ -64,7 +64,7 @@ class PipelineClass(object):
         return self.__sourceFrame
         # ˄
 
-    def __init__(self):
+    def __init__(self, setup):
 
         self.__setup = None
 

@@ -20,7 +20,7 @@ class StubSetup:
 
 
 def make_pipeline(frame):
-    p = PipelineClass()
+    p = PipelineClass(StubSetup())
     p._PipelineClass__setup = StubSetup()
     p._PipelineClass__math = MathClass
     p._PipelineClass__sourceFrame = frame
