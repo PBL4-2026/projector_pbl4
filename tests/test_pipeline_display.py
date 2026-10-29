@@ -2,26 +2,10 @@
 import numpy as np
 import pytest
 
+from image import Image
 import pipeline_class
+from conftest import StubSetup
 from pipeline_class import PipelineClass
-from side import Side
-
-
-class StubSetup:
-    def getProjectorResXY(self):
-        return [1920, 1080]
-
-    def getImageWidthCm(self):
-        return 100.0
-
-    def getProjectorSpacingCm(self):
-        return 80.0
-
-    def getBlendCurveGamma(self):
-        return 1.0
-
-    def getProjectorSide(self):
-        return Side.LEFT
 
 
 class StubDisplay:
@@ -46,12 +30,19 @@ class StubDisplay:
         self.calls.append(("close",))
 
 
+def _image_from_array(array):
+    image = Image()
+    image.setFrame(array)
+    return image
+
+
 def test_display_shows_fullscreen_and_closes(monkeypatch):
     StubDisplay.instances.clear()
     monkeypatch.setattr(pipeline_class, "Display", StubDisplay)
 
     pipeline = PipelineClass(StubSetup())
-    frame = np.zeros((100, 200, 3), np.uint8)
+    array = np.zeros((100, 200, 3), np.uint8)
+    frame = _image_from_array(array)
     pipeline.display(frame)
 
     assert pipeline._PipelineClass__output is frame
@@ -60,17 +51,28 @@ def test_display_shows_fullscreen_and_closes(monkeypatch):
 
     names = [call[0] for call in display.calls]
     assert names == ["show", "setFullscreen", "waitKey", "close"]
-    assert display.calls[0][1] is frame
+    assert display.calls[0][1] is array
     assert display.calls[1][1] is True
     assert display.calls[2][1] == 0
 
 
-def test_display_raises_for_non_array(monkeypatch):
+def test_display_raises_for_non_image(monkeypatch):
     StubDisplay.instances.clear()
     monkeypatch.setattr(pipeline_class, "Display", StubDisplay)
 
     pipeline = PipelineClass(StubSetup())
     with pytest.raises(ValueError):
         pipeline.display("not a frame")
+
+    assert len(StubDisplay.instances) == 0
+
+
+def test_display_raises_for_empty_image(monkeypatch):
+    StubDisplay.instances.clear()
+    monkeypatch.setattr(pipeline_class, "Display", StubDisplay)
+
+    pipeline = PipelineClass(StubSetup())
+    with pytest.raises(ValueError):
+        pipeline.display(Image())
 
     assert len(StubDisplay.instances) == 0

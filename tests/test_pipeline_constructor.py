@@ -3,7 +3,7 @@ from unittest import mock
 import numpy as np
 import pytest
 
-from conftest import SIZE_CASES
+from conftest import SIZE_CASES, asImage
 from mask import Mask
 from math_class import MathClass
 from pipeline_class import PipelineClass
@@ -51,7 +51,7 @@ def test_mask_is_built_once(makeSettings, loadSetup):
         p = PipelineClass(setup)
         assert spy.call_count == 1
         maskAtStart = p._PipelineClass__mask
-        sliceFrame = np.full((4, 200, 3), 200, np.uint8)
+        sliceFrame = asImage(np.full((4, 200, 3), 200, np.uint8))
         for _ in range(3):
             p.applyMask(sliceFrame)
         assert spy.call_count == 1

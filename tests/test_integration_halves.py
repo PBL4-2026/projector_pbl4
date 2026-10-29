@@ -12,9 +12,9 @@ pytestmark = pytest.mark.needs_steps("load", "crop")
 def runSide(makePipeline, side, **kwargs):
     p = makePipeline(side, **kwargs)
     p.load()
-    combined = p.scaleSource().copy()
+    combined = p.scaleSource().getFrame().copy()
     sliceFrame = p.crop()
-    return combined, sliceFrame, p.applyMask(sliceFrame)
+    return combined, sliceFrame.getFrame(), p.applyMask(sliceFrame).getFrame()
 
 
 def putTogether(leftOut, rightOut, overlapPx, shift=0):

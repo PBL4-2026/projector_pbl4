@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 import pytest
 
+from image import Image
 from pipeline_class import PipelineClass
 from setup_class import SetupClass
 
@@ -24,7 +25,10 @@ def make_pipeline(tmp_path, sourceName):
     }), encoding="utf-8")
     setup = SetupClass()
     setup.load(str(settingsPath))
-    return PipelineClass(setup)
+    p = PipelineClass(setup)
+    # Until D-43 the constructor does not store setup; set it as test_scale_source.py does.
+    p._PipelineClass__setup = setup
+    return p
 
 
 def test_good_image_fills_source_frame(tmp_path):
@@ -36,10 +40,10 @@ def test_good_image_fills_source_frame(tmp_path):
 
     out = p.load()
 
-    assert isinstance(out, np.ndarray)
-    assert out.dtype == np.uint8
-    assert out.shape == (HEIGHT, WIDTH, 3)
-    assert np.array_equal(out, written)
+    assert isinstance(out, Image)
+    assert out.getFrame().dtype == np.uint8
+    assert out.getShape() == (HEIGHT, WIDTH, 3)
+    assert np.array_equal(out.getFrame(), written)
     assert p._PipelineClass__sourceFrame is out
 
 

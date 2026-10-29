@@ -35,6 +35,36 @@ def pytest_collection_modifyitems(config, items):
                         reason="PipelineClass.%s() is still a stub" % name))
 
 
+class StubSetup(object):
+    """Minimal loaded settings, for tests that only need the constructor to work."""
+
+    def __init__(self, side=None):
+        from side import Side
+        self._side = side if side is not None else Side.LEFT
+
+    def getProjectorResXY(self):
+        return [1920, 1080]
+
+    def getImageWidthCm(self):
+        return 100.0
+
+    def getProjectorSpacingCm(self):
+        return 80.0
+
+    def getBlendCurveGamma(self):
+        return 1.0
+
+    def getProjectorSide(self):
+        return self._side
+
+
+def asImage(array):
+    from image import Image
+    image = Image()
+    image.setFrame(array)
+    return image
+
+
 class StubDisplay(object):
 
     def __init__(self):
