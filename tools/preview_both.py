@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Preview both projectors on one computer: run LEFT and RIGHT, join them, show the result.
 
-python tools/preview_both.py settings.left.json settings.right.json [--save out.png] [--no-window]
+python tools/preview_both.py settings.json [--save out.png] [--no-window]
 """
 import argparse
 import os
@@ -18,14 +18,20 @@ from display import Display
 from math_class import MathClass
 from pipeline_class import PipelineClass
 from setup_class import SetupClass
+from side import Side
 
 MAX_WINDOW_WIDTH = 1600
 
 
-def renderSide(settingsPath):
-    """Run the pipeline steps for one settings file, without opening a projector window."""
+def renderSide(settingsPath, side=None):
+    """Run the pipeline steps for one settings file, without opening a projector window.
+
+    side: Side to use instead of the projectorSide in the file (None keeps the file's).
+    """
     setup = SetupClass()
     setup.load(settingsPath)
+    if side is not None:
+        setup.setProjectorSide(side)
     if not setup.validate():
         raise ValueError("Invalid settings: %s" % settingsPath)
     pipeline = PipelineClass(setup)
@@ -46,15 +52,21 @@ def join(leftFrame, rightFrame, overlapPx):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Preview the LEFT and RIGHT pictures joined together.")
-    parser.add_argument("left_file", help="settings file with projectorSide LEFT")
-    parser.add_argument("right_file", help="settings file with projectorSide RIGHT")
+    parser.add_argument("left_file", help="settings file (LEFT if a second file is given)")
+    parser.add_argument("right_file", nargs="?",
+                        help="optional second settings file for RIGHT; without it the first "
+                             "file is used for both sides")
     parser.add_argument("--save", metavar="PATH", help="also write the joined picture to this file")
     parser.add_argument("--no-window", action="store_true", help="do not open a window")
     args = parser.parse_args(argv)
 
     try:
-        leftSetup, leftFrame = renderSide(args.left_file)
-        _, rightFrame = renderSide(args.right_file)
+        if args.right_file:
+            leftSetup, leftFrame = renderSide(args.left_file)
+            _, rightFrame = renderSide(args.right_file)
+        else:
+            leftSetup, leftFrame = renderSide(args.left_file, Side.LEFT)
+            _, rightFrame = renderSide(args.left_file, Side.RIGHT)
         overlapPx = MathClass.overlapPx(
             leftSetup.getProjectorResXY()[0],
             leftSetup.getImageWidthCm(),

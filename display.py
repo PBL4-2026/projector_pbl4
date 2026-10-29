@@ -224,7 +224,34 @@ class Display(object):
 
 
 # ˅
+def screenRects(cocoaFrames):
+    """Convert macOS screen frames to (x, y, width, height) with the origin at the top left.
 
+    cocoaFrames: [(x, y, width, height), ...] in macOS coordinates (origin at the bottom
+    left of the primary screen). The first entry is the primary screen.
+    """
+    primaryHeight = cocoaFrames[0][3]
+    return [(int(x), int(primaryHeight - (y + height)), int(width), int(height))
+            for x, y, width, height in cocoaFrames]
+
+
+def findProjectorScreens():
+    """Return (screens, index): the connected screens and the one to use for the projector.
+
+    The projector is the first screen that is not the primary one. With a single screen,
+    or if the screens cannot be read, the primary screen (index 0) is used and screens
+    may be None, which leaves the window placement to the system.
+    """
+    try:
+        import AppKit
+        frames = [(f.origin.x, f.origin.y, f.size.width, f.size.height)
+                  for f in (s.frame() for s in AppKit.NSScreen.screens())]
+    except Exception:
+        return None, 0
+    if not frames:
+        return None, 0
+    rects = screenRects(frames)
+    return rects, (1 if len(rects) > 1 else 0)
 # ˄
 
 

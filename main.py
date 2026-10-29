@@ -4,6 +4,7 @@ import sys
 
 from pipeline_class import PipelineClass
 from setup_class import SetupClass
+from side import Side
 
 _log = logging.getLogger(__name__)
 
@@ -16,6 +17,9 @@ def main(argv=None):
     parser = argparse.ArgumentParser(
         description="Show this computer's half of the dual-projector picture.")
     parser.add_argument("settings", help="path to the settings JSON file")
+    parser.add_argument("--side", choices=["LEFT", "RIGHT"], type=str.upper,
+                        help="which projector this computer drives (overrides projectorSide "
+                             "in the settings file)")
     args = parser.parse_args(argv)
 
     logging.basicConfig(level=logging.INFO)
@@ -26,6 +30,9 @@ def main(argv=None):
     except (OSError, ValueError) as e:
         _log.error("Cannot load settings: %s", e)
         return EXIT_ERROR
+
+    if args.side:
+        setup.setProjectorSide(Side[args.side])
 
     if not setup.validate():
         return EXIT_INVALID

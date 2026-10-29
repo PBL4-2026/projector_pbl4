@@ -7,7 +7,7 @@ import math
 import cv2
 import numpy as np
 
-from display import Display
+from display import Display, findProjectorScreens
 from image import Image
 from math_class import MathClass
 from setup_class import SetupClass
@@ -93,7 +93,8 @@ class PipelineClass(object):
         if array is None:
             raise ValueError("frame is empty: call load() and scaleSource() first")
 
-        display = Display()
+        screens, screenIndex = findProjectorScreens()
+        display = Display(screens=screens, screen=screenIndex)
         try:
             display.show(array)
             display.setFullscreen(True)

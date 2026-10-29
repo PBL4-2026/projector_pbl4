@@ -130,3 +130,22 @@ def test_cli_without_argument_shows_usage():
     r = cli()
     assert r.returncode == 2
     assert "usage" in r.stderr.lower() and "Traceback" not in r.stderr
+
+
+def test_side_option_overrides_the_file(makeSettings, runCalls):
+    from side import Side
+    path = makeSettings(side="LEFT")
+    assert mainModule.main([path, "--side", "right"]) == 0
+    assert runCalls[0]._PipelineClass__setup.getProjectorSide() is Side.RIGHT
+
+
+def test_without_side_option_the_file_decides(makeSettings, runCalls):
+    from side import Side
+    assert mainModule.main([makeSettings(side="RIGHT")]) == 0
+    assert runCalls[0]._PipelineClass__setup.getProjectorSide() is Side.RIGHT
+
+
+def test_bad_side_value_is_rejected(makeSettings):
+    with pytest.raises(SystemExit) as excinfo:
+        mainModule.main([makeSettings(), "--side", "MIDDLE"])
+    assert excinfo.value.code == 2
