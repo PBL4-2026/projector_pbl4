@@ -47,6 +47,40 @@ class Display(object):
         return self.__fullscreen
         # ˄
 
+    @staticmethod
+    def buildTestImage(width=1280, height=720):
+        # ˅
+        """Build a test frame (BGR) with colour bars, a checker pattern and text.
+
+        width: frame width in pixels
+        height: frame height in pixels
+        Returns a numpy.ndarray of shape (height, width, 3) and dtype uint8.
+        """
+        upperHeight = height // 2
+        lowerHeight = height - upperHeight
+
+        bars = np.zeros((upperHeight, width, 3), dtype=np.uint8)
+        colours = [
+            (255, 255, 255), (0, 255, 255), (255, 255, 0), (0, 255, 0),
+            (255, 0, 255), (0, 0, 255), (255, 0, 0), (0, 0, 0),
+        ]
+        barWidth = width // len(colours)
+        for i, colour in enumerate(colours):
+            bars[:, i * barWidth:(i + 1) * barWidth] = colour
+
+        cell = 80
+        yy, xx = np.indices((lowerHeight, width))
+        checker = (((yy // cell) + (xx // cell)) % 2 * 200 + 20).astype(np.uint8)
+        lower = np.dstack([checker, checker, checker])
+
+        frame = np.vstack([bars, lower])
+        cv2.putText(frame, "PBL4 TEST", (40, upperHeight + lowerHeight // 2),
+                    cv2.FONT_HERSHEY_SIMPLEX, 2.0, (0, 0, 0), 4, cv2.LINE_AA)
+        cv2.putText(frame, "PBL4 TEST", (40, upperHeight + lowerHeight // 2),
+                    cv2.FONT_HERSHEY_SIMPLEX, 2.0, (0, 255, 255), 2, cv2.LINE_AA)
+        return frame
+        # ˄
+
     def show(self, frame):
         # ˅
         """Show a frame in the window. The first call creates the window.
