@@ -32,7 +32,28 @@ class PipelineClass(object):
 
     def crop(self):
         # ˅
-        pass
+        if self.__sourceFrame is None:
+            raise ValueError("No source frame: call load() and scaleSource() first")
+
+        resX, _resY = self.__setup.getProjectorResXY()
+        region = self.__math.cropRegion(
+            self.__setup.getProjectorSide(),
+            resX,
+            self.__setup.getImageWidthCm(),
+            self.__setup.getProjectorSpacingCm(),
+        )
+        xStart = region.getXStartPx()
+        width = region.getWidthPx()
+        frameWidth = self.__sourceFrame.shape[1]
+
+        if xStart < 0 or width <= 0 or xStart + width > frameWidth:
+            raise ValueError(
+                "Region (%d, %d) does not fit inside scaled source frame width %d"
+                % (xStart, width, frameWidth)
+            )
+
+        # Return a copy so applyMask() cannot modify sourceFrame.
+        return self.__sourceFrame[:, xStart:xStart + width].copy()
         # ˄
 
     def applyMask(self, sliceFrame):
@@ -55,7 +76,21 @@ class PipelineClass(object):
 
     def display(self, frame):
         # ˅
-        pass
+        if not isinstance(frame, np.ndarray):
+            raise ValueError(
+                "frame must be a numpy.ndarray, got %s" % type(frame).__name__
+            )
+
+        display = Display()
+        try:
+            display.show(frame)
+            display.setFullscreen(True)
+            while display.waitKey(0) == -1:
+                pass
+        finally:
+            display.close()
+
+        self.__output = frame
         # ˄
 
     def run(self):
