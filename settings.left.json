@@ -1,8 +1,8 @@
 
 {
   "projectorResXY": [1920, 1080],
-  "imageWidthCm": 100.0,
-  "projectorSpacingCm": 80.0,
+  "imageWidthCm": 134.0,
+  "projectorSpacingCm": 108.0,
   "blendCurveGamma": 1.0,
   "sourcePath": "photos/dice.jpg",
   "projectorSide": "LEFT"
