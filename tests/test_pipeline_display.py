@@ -4,6 +4,24 @@ import pytest
 
 import pipeline_class
 from pipeline_class import PipelineClass
+from side import Side
+
+
+class StubSetup:
+    def getProjectorResXY(self):
+        return [1920, 1080]
+
+    def getImageWidthCm(self):
+        return 100.0
+
+    def getProjectorSpacingCm(self):
+        return 80.0
+
+    def getBlendCurveGamma(self):
+        return 1.0
+
+    def getProjectorSide(self):
+        return Side.LEFT
 
 
 class StubDisplay:
@@ -32,7 +50,7 @@ def test_display_shows_fullscreen_and_closes(monkeypatch):
     StubDisplay.instances.clear()
     monkeypatch.setattr(pipeline_class, "Display", StubDisplay)
 
-    pipeline = PipelineClass(object())
+    pipeline = PipelineClass(StubSetup())
     frame = np.zeros((100, 200, 3), np.uint8)
     pipeline.display(frame)
 
@@ -51,7 +69,7 @@ def test_display_raises_for_non_array(monkeypatch):
     StubDisplay.instances.clear()
     monkeypatch.setattr(pipeline_class, "Display", StubDisplay)
 
-    pipeline = PipelineClass(object())
+    pipeline = PipelineClass(StubSetup())
     with pytest.raises(ValueError):
         pipeline.display("not a frame")
 

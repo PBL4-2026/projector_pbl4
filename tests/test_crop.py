@@ -20,6 +20,9 @@ class StubSetup:
     def getProjectorSpacingCm(self):
         return 80.0
 
+    def getBlendCurveGamma(self):
+        return 1.0
+
     def getProjectorSide(self):
         return self._side
 
