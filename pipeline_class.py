@@ -6,6 +6,7 @@ import logging
 import cv2
 import numpy as np
 
+from display import Display
 from image import Image
 from math_class import MathClass
 from setup_class import SetupClass
@@ -35,6 +36,10 @@ class PipelineClass(object):
         if self.__sourceFrame is None:
             raise ValueError("No source frame: call load() and scaleSource() first")
 
+        frame = self.__sourceFrame.getFrame()
+        if frame is None:
+            raise ValueError("No source frame: call load() and scaleSource() first")
+
         resX, _resY = self.__setup.getProjectorResXY()
         region = self.__math.cropRegion(
             self.__setup.getProjectorSide(),
@@ -44,7 +49,7 @@ class PipelineClass(object):
         )
         xStart = region.getXStartPx()
         width = region.getWidthPx()
-        frameWidth = self.__sourceFrame.shape[1]
+        frameWidth = frame.shape[1]
 
         if xStart < 0 or width <= 0 or xStart + width > frameWidth:
             raise ValueError(
@@ -52,8 +57,10 @@ class PipelineClass(object):
                 % (xStart, width, frameWidth)
             )
 
-        # Return a copy so applyMask() cannot modify sourceFrame.
-        return self.__sourceFrame[:, xStart:xStart + width].copy()
+        # Return a copy wrapped in Image so applyMask() cannot modify sourceFrame.
+        result = Image()
+        result.setFrame(frame[:, xStart:xStart + width].copy())
+        return result
         # ˄
 
     def applyMask(self, sliceFrame):
@@ -76,14 +83,18 @@ class PipelineClass(object):
 
     def display(self, frame):
         # ˅
-        if not isinstance(frame, np.ndarray):
+        if not isinstance(frame, Image):
             raise ValueError(
-                "frame must be a numpy.ndarray, got %s" % type(frame).__name__
+                "frame must be an Image, got %s" % type(frame).__name__
             )
+
+        array = frame.getFrame()
+        if array is None:
+            raise ValueError("frame is empty: call load() and scaleSource() first")
 
         display = Display()
         try:
-            display.show(frame)
+            display.show(array)
             display.setFullscreen(True)
             while display.waitKey(0) == -1:
                 pass
