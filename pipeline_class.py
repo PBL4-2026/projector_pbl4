@@ -145,7 +145,17 @@ class PipelineClass(object):
         self.__output = None
 
         # ˅
-        pass
+        if setup is None or setup.getProjectorResXY() is None:
+            raise ValueError("setup must be a loaded SetupClass: call load() and validate() first")
+        self.__setup = setup
+        self.__math = MathClass()
+        resX = setup.getProjectorResXY()[0]
+        w = setup.getImageWidthCm()
+        d = setup.getProjectorSpacingCm()
+        side = setup.getProjectorSide()
+        self.__region = self.__math.cropRegion(side, resX, w, d)
+        overlapPx = self.__math.overlapPx(resX, w, d)
+        self.__mask = self.__math.blendMask(overlapPx, resX, side, setup.getBlendCurveGamma())
         # ˄
 
     # ˅

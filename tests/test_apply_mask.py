@@ -5,6 +5,7 @@ import pytest
 from image import Image
 from math_class import MathClass
 from pipeline_class import PipelineClass
+from conftest import StubSetup
 from side import Side
 
 
@@ -15,7 +16,7 @@ def wrap(frame):
 
 
 def make_pipeline(side, overlapPx=4, resX=10, gamma=1.0):
-    p = PipelineClass(object())
+    p = PipelineClass(StubSetup())
     p._PipelineClass__mask = MathClass.blendMask(overlapPx, resX, side, gamma)
     return p
 
@@ -58,4 +59,4 @@ def test_wrong_width_raises():
 
 def test_no_mask_raises():
     with pytest.raises(ValueError):
-        PipelineClass(object()).applyMask(wrap(np.zeros((2, 10, 3), np.uint8)))
+        PipelineClass(StubSetup()).applyMask(wrap(np.zeros((2, 10, 3), np.uint8)))

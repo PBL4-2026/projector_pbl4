@@ -7,6 +7,7 @@ import pytest
 from image import Image
 from math_class import MathClass
 from pipeline_class import PipelineClass
+from side import Side
 
 
 class StubSetup:
@@ -18,6 +19,12 @@ class StubSetup:
 
     def getProjectorSpacingCm(self):
         return 80.0
+
+    def getBlendCurveGamma(self):
+        return 1.0
+
+    def getProjectorSide(self):
+        return Side.LEFT
 
 
 def make_pipeline(frame):

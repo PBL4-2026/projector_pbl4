@@ -4,6 +4,7 @@ import pytest
 
 from image import Image
 import pipeline_class
+from conftest import StubSetup
 from pipeline_class import PipelineClass
 
 
@@ -39,7 +40,7 @@ def test_display_shows_fullscreen_and_closes(monkeypatch):
     StubDisplay.instances.clear()
     monkeypatch.setattr(pipeline_class, "Display", StubDisplay)
 
-    pipeline = PipelineClass(object())
+    pipeline = PipelineClass(StubSetup())
     array = np.zeros((100, 200, 3), np.uint8)
     frame = _image_from_array(array)
     pipeline.display(frame)
@@ -59,7 +60,7 @@ def test_display_raises_for_non_image(monkeypatch):
     StubDisplay.instances.clear()
     monkeypatch.setattr(pipeline_class, "Display", StubDisplay)
 
-    pipeline = PipelineClass(object())
+    pipeline = PipelineClass(StubSetup())
     with pytest.raises(ValueError):
         pipeline.display("not a frame")
 
@@ -70,7 +71,7 @@ def test_display_raises_for_empty_image(monkeypatch):
     StubDisplay.instances.clear()
     monkeypatch.setattr(pipeline_class, "Display", StubDisplay)
 
-    pipeline = PipelineClass(object())
+    pipeline = PipelineClass(StubSetup())
     with pytest.raises(ValueError):
         pipeline.display(Image())
 
