@@ -107,3 +107,16 @@ class TestGetShape:
         image.load(str(sample_path))
         height, width, channels = image.getShape()
         assert image.getFrame().shape == (height, width, channels)
+
+
+class TestSetFrame:
+    def test_holds_the_given_frame(self):
+        frame = np.zeros((4, 6, 3), np.uint8)
+        image = Image()
+        image.setFrame(frame)
+        assert image.getFrame() is frame
+        assert image.getShape() == (4, 6, 3)
+
+    def test_rejects_non_array(self):
+        with pytest.raises(ValueError):
+            Image().setFrame([[0, 0, 0]])
