@@ -4,6 +4,6 @@
   "imageWidthCm": 100.0,
   "projectorSpacingCm": 80.0,
   "blendCurveGamma": 1.0,
-  "sourcePath": "images/sample.jpg",
+  "sourcePath": "photos/dice.jpg",
   "projectorSide": "RIGHT"
 }
