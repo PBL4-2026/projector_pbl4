@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # ˅
 import logging
+import math
 
 import cv2
 import numpy as np
@@ -106,7 +107,11 @@ class PipelineClass(object):
 
     def run(self):
         # ˅
-        pass
+        # The region and mask were built once in the constructor.
+        self.load()
+        self.scaleSource()
+        sliceFrame = self.crop()
+        self.display(self.applyMask(sliceFrame))
         # ˄
 
     def scaleSource(self):
@@ -120,14 +125,21 @@ class PipelineClass(object):
         # Combined image: both projectors side by side, minus the shared overlap.
         dstW, dstH = 2 * resX - overlapPx, resY
         srcH, srcW = src.shape[:2]
-        # The picture is stretched to the target size; warn when that distorts it.
-        if abs(srcW / srcH - dstW / dstH) / (dstW / dstH) > 0.01:
-            _log.warning(
-                "Source aspect ratio %.3f differs from target %.3f by more than 1%%; "
-                "the picture will be stretched", srcW / srcH, dstW / dstH)
-        interpolation = cv2.INTER_AREA if dstW * dstH < srcW * srcH else cv2.INTER_LINEAR
+        # Keep the aspect ratio: scale until the picture covers the target on both
+        # sides, then cut the extra from the centre. Nothing is stretched.
+        scale = max(dstW / srcW, dstH / srcH)
+        newW = max(dstW, math.ceil(srcW * scale - 1e-9))
+        newH = max(dstH, math.ceil(srcH * scale - 1e-9))
+        if (newW, newH) != (dstW, dstH):
+            _log.info("Source aspect ratio %.3f differs from target %.3f; "
+                      "the extra edges are cropped", srcW / srcH, dstW / dstH)
+        interpolation = cv2.INTER_AREA if scale < 1 else cv2.INTER_LINEAR
+        resized = cv2.resize(src, (newW, newH), interpolation=interpolation)
+        x0 = (newW - dstW) // 2
+        y0 = (newH - dstH) // 2
+        resized = resized[y0:y0 + dstH, x0:x0 + dstW].copy()
         scaled = Image()
-        scaled.setFrame(cv2.resize(src, (dstW, dstH), interpolation=interpolation))
+        scaled.setFrame(resized)
         self.__sourceFrame = scaled
         return scaled
         # ˄
