@@ -6,7 +6,7 @@ import logging
 import cv2
 import numpy as np
 
-from display import Display
+from image import Image
 from math_class import MathClass
 from setup_class import SetupClass
 
@@ -22,7 +22,12 @@ class PipelineClass(object):
 
     def load(self):
         # ˅
-        pass
+        # Image.load() raises FileNotFoundError / ValueError naming the path.
+        path = self.__setup.getSourcePath()
+        image = Image()
+        image.load(path)
+        self.__sourceFrame = image
+        return image
         # ˄
 
     def crop(self):
@@ -57,13 +62,16 @@ class PipelineClass(object):
             raise ValueError("No mask: the mask must be built before applyMask()")
         # The mask is built once elsewhere and only read here.
         alpha = np.asarray(self.__mask.getAlpha(), dtype=np.float64)
-        if sliceFrame.shape[1] != alpha.shape[0]:
+        frame = sliceFrame.getFrame()
+        if frame.shape[1] != alpha.shape[0]:
             raise ValueError(
-                f"Slice width {sliceFrame.shape[1]} does not match mask length {alpha.shape[0]}")
+                f"Slice width {frame.shape[1]} does not match mask length {alpha.shape[0]}")
         # One multiplier per column, broadcast over rows and colour channels.
-        scale = alpha.reshape((1, -1) + (1,) * (sliceFrame.ndim - 2))
-        out = np.rint(sliceFrame.astype(np.float64) * scale)
-        return np.clip(out, 0, 255).astype(np.uint8)
+        scale = alpha.reshape((1, -1) + (1,) * (frame.ndim - 2))
+        out = np.rint(frame.astype(np.float64) * scale)
+        result = Image()
+        result.setFrame(np.clip(out, 0, 255).astype(np.uint8))
+        return result
         # ˄
 
     def display(self, frame):
@@ -92,9 +100,9 @@ class PipelineClass(object):
 
     def scaleSource(self):
         # ˅
-        src = self.__sourceFrame
-        if src is None:
+        if self.__sourceFrame is None:
             raise ValueError("No source frame: call load() first")
+        src = self.__sourceFrame.getFrame()
         resX, resY = self.__setup.getProjectorResXY()
         overlapPx = self.__math.overlapPx(
             resX, self.__setup.getImageWidthCm(), self.__setup.getProjectorSpacingCm())
@@ -107,8 +115,10 @@ class PipelineClass(object):
                 "Source aspect ratio %.3f differs from target %.3f by more than 1%%; "
                 "the picture will be stretched", srcW / srcH, dstW / dstH)
         interpolation = cv2.INTER_AREA if dstW * dstH < srcW * srcH else cv2.INTER_LINEAR
-        self.__sourceFrame = cv2.resize(src, (dstW, dstH), interpolation=interpolation)
-        return self.__sourceFrame
+        scaled = Image()
+        scaled.setFrame(cv2.resize(src, (dstW, dstH), interpolation=interpolation))
+        self.__sourceFrame = scaled
+        return scaled
         # ˄
 
     def __init__(self, setup):

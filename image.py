@@ -67,7 +67,14 @@ class Image(object):
         # ˄
 
     # ˅
-    
+    def setFrame(self, frame):
+        """Hold an already-built frame (numpy.ndarray) instead of loading one from a file.
+
+        Raises ValueError if frame is not a numpy.ndarray.
+        """
+        if not isinstance(frame, np.ndarray):
+            raise ValueError(f"frame must be a numpy.ndarray, got {type(frame).__name__}")
+        self.__frame = frame
     # ˄
 
 
