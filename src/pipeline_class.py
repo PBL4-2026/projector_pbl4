@@ -9,7 +9,7 @@ from setup_class import SetupClass
 
 
 class PipelineClass(object):
-     """
+    """!
     @brief Processes an image for dual-projector display.
 
     Loads the source image, scales it, crops the region for
@@ -19,7 +19,7 @@ class PipelineClass(object):
     # ˄
 
     def load(self):
-        """
+        """!
         @brief Loads the source image using the path in the settings.
 
         @return None
@@ -29,7 +29,7 @@ class PipelineClass(object):
         # ˄
 
     def crop(self):
-        """
+        """!
         @brief Crops the part of the scaled image for this projector.
 
         @return Image slice for this projector.
@@ -39,7 +39,7 @@ class PipelineClass(object):
         # ˄
 
     def applyMask(self, sliceFrame):
-        """
+        """!
         @brief Applies the blending mask to the cropped image.
 
         @param sliceFrame Image slice produced by crop().
@@ -50,7 +50,7 @@ class PipelineClass(object):
         # ˄
 
     def display(self, frame):
-        """
+        """!
         @brief Displays the processed image on this projector.
 
         @param frame Image to display.
@@ -61,7 +61,7 @@ class PipelineClass(object):
         # ˄
 
     def run(self):
-         """
+        """!
         @brief Runs the image-processing steps in order.
 
         Loads, scales, crops, applies the mask, and displays the image.
@@ -74,7 +74,7 @@ class PipelineClass(object):
         # ˄
 
     def scaleSource(self):
-      """
+        """!
         @brief Resizes the source image to cover both projectors.
 
         The exact scaling method is still to be decided.
@@ -86,7 +86,7 @@ class PipelineClass(object):
         # ˄
 
     def __init__(self):
-        """
+        """!
         @brief Initializes the pipeline attributes.
         """
 

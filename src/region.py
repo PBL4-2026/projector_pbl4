@@ -17,6 +17,8 @@ class Region(object):
     def getXStartPx(self):
         """!
         @brief Give the x start pixel for the projector.
+        @return  x start pixel for the projector
+        @rtype float
         """
 
         # ˅
@@ -26,7 +28,8 @@ class Region(object):
     def getWidthPx(self):
         """!
         @brief Give the width pixel for the projector.
-
+        @return width pixel for the projector
+        @rtype float
         """
 
         # ˅
@@ -36,7 +39,7 @@ class Region(object):
     def __init__(self, xStartPx, widthPx):
         """!
         @param xStartPx first column [px]
-        @param number of columns [px]
+        @param widthPX number of columns [px]
         """
 
         self.__xStartPx = None

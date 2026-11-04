@@ -14,10 +14,9 @@ class Mask(object):
     
     # ˄
     
-    @classmethod
     def getAlpha(self):
-        """!"
-        @brief Give the brghtnness multiples for the projector.
+        """!
+        @brief Give the brightness multipliers for the projector.
         @return list of float List of floats between 0 to 1, one per one pixel column.
         """
 

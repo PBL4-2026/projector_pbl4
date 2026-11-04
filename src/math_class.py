@@ -25,7 +25,7 @@ class MathClass(object):
     @classmethod
     def overlapCm(cls, w, d):
         """!
-        @brief Calculates the overlapped width between the two both projectors
+        @brief Calculates the overlapped width between the two projectors
 
         @param w Width of the projected image from one projector [cm]
         @param d Distance between the two projectors [cm]
