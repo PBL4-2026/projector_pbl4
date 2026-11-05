@@ -19,11 +19,11 @@ class Image(object):
 
     def load(self, path):
         """!
-        @brief
+        @brief Reads the file at path as a colour picture and keeps it inside the object.
         
-        @param
-        @return
-        @rtype
+        @param path location of the picture (string)
+        @return the frame (NumPy array)
+        @rtype numpy.ndarray
         @throws
         @throws
         """
@@ -56,10 +56,10 @@ class Image(object):
 
     def getFrame(self):
         """!
-        @brief
+        @brief Gives the picture data.
         
-        @return
-        @rtype
+        @return the frame, or None if nothing is loaded
+        @rtype numpy.ndarray
         """
 
         # ˅
@@ -69,10 +69,10 @@ class Image(object):
 
     def getShape(self):
         """!
-        @brief
+        @brief Gives the picture size.
         
-        @return
-        @rtype
+        @return (height, width, channels)
+        @rtype tuple
         @throws
         """
 
@@ -87,12 +87,6 @@ class Image(object):
         # ˄
 
     def __init__(self):
-        """!
-        @brief
-        
-        @return
-        @rtype
-        """
 
         self.__frame = None
 
@@ -103,12 +97,12 @@ class Image(object):
     # ˅
     def setFrame(self, frame):
         """!
-        @brief
+        @brief Puts new picture data into the object. Used for the results of scaling, cropping and masking.
 
-        @param
+        @param frame the new picture data (NumPy array)
 
-        @return
-        @rtype
+        @return nothing
+        @rtype none
         
         @throws
         """
