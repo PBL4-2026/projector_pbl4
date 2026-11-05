@@ -34,6 +34,8 @@ class PipelineClass(object):
         @brief Loads the source image using the path in the settings.
 
         @return None
+        @throws FileNotFoundError if the path is wrong. 
+        @throws ValueError if the file is not a readable picture.
         """
         # ˅
         # Image.load() raises FileNotFoundError / ValueError naming the path.
@@ -49,6 +51,7 @@ class PipelineClass(object):
         @brief Crops the part of the scaled image for this projector.
 
         @return Image slice for this projector.
+        @throws ValueError if there is no source, or the region does not fit.
         """
 
         # ˅
@@ -88,6 +91,7 @@ class PipelineClass(object):
 
         @param sliceFrame Image slice produced by crop().
         @return Image with the blending mask applied.
+        @throws ValueError if there is no mask, or the slice width is not resX.
         """
 
         # ˅
@@ -113,6 +117,7 @@ class PipelineClass(object):
 
         @param frame Image to display.
         @return None
+        @throws ValueError if frame is not an Image or is empty.
         """
 
         # ˅
@@ -146,6 +151,7 @@ class PipelineClass(object):
         Video support is optional; still images are required.
 
         @return None
+        @throws Whatever the steps raise.
         """
 
         # ˅
@@ -197,6 +203,7 @@ class PipelineClass(object):
     def __init__(self, setup):
         """!
         @brief Initializes the pipeline attributes.
+        @throws ValueError if setup is missing or not loaded.
         """
 
         self.__setup = None

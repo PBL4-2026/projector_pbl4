@@ -42,6 +42,9 @@ class SetupClass(object):
         @param path location of the file (string)
         @return nothing
         @rtype None
+        @throws FileNotFoundError if the file does not exist. 
+        @throws ValueError if it is not valid JSON, is not a JSON object, lacks a setting, or a setting has the wrong type. The message names the setting.
+
         """
 
         # ˅
@@ -84,6 +87,9 @@ class SetupClass(object):
         """!
         @brief Checks that the loaded settings are usable. The exact checks are being finalised, for example positive numbers and an existing source file. Call it after load() and before using any setting
 
+        @return nothing
+        @rtype None
+        @throws none
         @return True if all checks pass, False otherwise
         @rtype bool
         """
@@ -129,6 +135,7 @@ class SetupClass(object):
         @param none
         @return List of two integers [px]
         @rtype list
+        @throws none
         """
 
         # ˅
@@ -142,6 +149,7 @@ class SetupClass(object):
         @param none
         @return float [cm]
         @rtype float
+        @throws none
         """
 
         # ˅
@@ -155,6 +163,7 @@ class SetupClass(object):
         @param none
         @return float [cm]
         @rtype float
+        @throws none
         """
 
         # ˅
@@ -168,6 +177,7 @@ class SetupClass(object):
         @param none
         @return float
         @rtype float
+        @throws none
         """
 
         # ˅
@@ -181,6 +191,7 @@ class SetupClass(object):
         @param none
         @return string
         @rtype string
+        @throws none
         """
         
         # ˅
@@ -194,6 +205,7 @@ class SetupClass(object):
         @param none
         @return Side
         @rtype Side
+        @throws none
         """
 
         # ˅
@@ -273,6 +285,7 @@ class SetupClass(object):
         """Override projectorSide after load(), so both computers can share one settings file.
 
         side: Side.LEFT or Side.RIGHT. Raises ValueError for anything else.
+        @throws ValueError if side is not a Side.
         """
         if not isinstance(side, Side):
             raise ValueError("side must be a Side, got %r" % (side,))
