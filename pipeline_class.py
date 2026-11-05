@@ -18,11 +18,23 @@ _log = logging.getLogger(__name__)
 
 
 class PipelineClass(object):
+    """!
+    @brief Processes an image for dual-projector display.
+
+    Loads the source image, scales it, crops the region for
+    this projector, applies a blending mask, and displays the result.
+    """
+
     # ˅
     
     # ˄
 
     def load(self):
+        """!
+        @brief Loads the source image using the path in the settings.
+
+        @return None
+        """
         # ˅
         # Image.load() raises FileNotFoundError / ValueError naming the path.
         path = self.__setup.getSourcePath()
@@ -33,6 +45,12 @@ class PipelineClass(object):
         # ˄
 
     def crop(self):
+        """!
+        @brief Crops the part of the scaled image for this projector.
+
+        @return Image slice for this projector.
+        """
+
         # ˅
         if self.__sourceFrame is None:
             raise ValueError("No source frame: call load() and scaleSource() first")
@@ -65,6 +83,13 @@ class PipelineClass(object):
         # ˄
 
     def applyMask(self, sliceFrame):
+        """!
+        @brief Applies the blending mask to the cropped image.
+
+        @param sliceFrame Image slice produced by crop().
+        @return Image with the blending mask applied.
+        """
+
         # ˅
         if self.__mask is None:
             raise ValueError("No mask: the mask must be built before applyMask()")
@@ -83,6 +108,13 @@ class PipelineClass(object):
         # ˄
 
     def display(self, frame):
+        """!
+        @brief Displays the processed image on this projector.
+
+        @param frame Image to display.
+        @return None
+        """
+
         # ˅
         if not isinstance(frame, Image):
             raise ValueError(
@@ -107,6 +139,15 @@ class PipelineClass(object):
         # ˄
 
     def run(self):
+        """!
+        @brief Runs the image-processing steps in order.
+
+        Loads, scales, crops, applies the mask, and displays the image.
+        Video support is optional; still images are required.
+
+        @return None
+        """
+
         # ˅
         # The region and mask were built once in the constructor.
         self.load()
@@ -116,6 +157,14 @@ class PipelineClass(object):
         # ˄
 
     def scaleSource(self):
+        """!
+        @brief Resizes the source image to cover both projectors.
+
+        The exact scaling method is still to be decided.
+
+        @return None for now.
+        """
+
         # ˅
         if self.__sourceFrame is None:
             raise ValueError("No source frame: call load() first")
@@ -146,6 +195,9 @@ class PipelineClass(object):
         # ˄
 
     def __init__(self, setup):
+        """!
+        @brief Initializes the pipeline attributes.
+        """
 
         self.__setup = None
 

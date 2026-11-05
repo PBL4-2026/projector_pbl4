@@ -22,11 +22,27 @@ _KEY_SIDE = "projectorSide"
 
 
 class SetupClass(object):
+    """!
+    @brief SetupClass reads settings.json, including which side this computer shows, then validate() checks it.
+
+    
+    SetupClass stores and checks the user's settings. It does no calculations. 
+    Its attributes are private (a double underscore in Python) and are read through the getters.
+    """
+
     # ˅
     
     # ˄
 
     def load(self, path):
+        """!
+        @brief Reads the settings file (settings.json) and fills in all attributes. A missing file or setting should give an error that names the problem
+
+        @param path location of the file (string)
+        @return nothing
+        @rtype None
+        """
+
         # ˅
         try:
             with open(path, "r", encoding="utf-8") as f:
@@ -64,6 +80,13 @@ class SetupClass(object):
         # ˄
 
     def validate(self):
+        """!
+        @brief Checks that the loaded settings are usable. The exact checks are being finalised, for example positive numbers and an existing source file. Call it after load() and before using any setting
+
+        @return nothing
+        @rtype None
+        """
+
         # ˅
         res = self.__projectorResXY
         if (not isinstance(res, list) or len(res) != 2
@@ -99,31 +122,79 @@ class SetupClass(object):
         # ˄
 
     def getProjectorResXY(self):
+        """!
+        @brief Gives the projector resolution
+
+        @param none
+        @return List of two integers [px]
+        @rtype list
+        """
+
         # ˅
         return list(self.__projectorResXY) if self.__projectorResXY is not None else None
         # ˄
 
     def getImageWidthCm(self):
+        """!
+        @brief Gives the width of the projected image from one projector [cm]
+
+        @param none
+        @return float [cm]
+        @rtype float
+        """
+
         # ˅
         return self.__imageWidthCm
         # ˄
 
     def getProjectorSpacingCm(self):
+        """!
+        @brief Gives the spacing between the projectors [cm]
+
+        @param none
+        @return float [cm]
+        @rtype float
+        """
+
         # ˅
         return self.__projectorSpacingCm
         # ˄
 
     def getBlendCurveGamma(self):
+        """!
+        @brief Gives the gamma value for the blend curve
+
+        @param none
+        @return float
+        @rtype float
+        """
+
         # ˅
         return self.__blendCurveGamma
         # ˄
 
     def getSourcePath(self):
+        """!
+        @brief Gives the path of the image to display
+
+        @param none
+        @return string
+        @rtype string
+        """
+        
         # ˅
         return self.__sourcePath
         # ˄
 
     def getProjectorSide(self):
+        """!
+        @brief Gives which projector this computer drives
+
+        @param none
+        @return Side
+        @rtype Side
+        """
+        
         # ˅
         return self.__projectorSide
         # ˄

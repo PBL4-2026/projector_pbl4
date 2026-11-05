@@ -7,6 +7,10 @@ import numpy as np
 
 
 class Display(object):
+    """!
+    @brief Placeholder class in the skeleton; it will open a full-screen window on one chosen screen.
+    """
+    
     # ˅
     
     # ˄
