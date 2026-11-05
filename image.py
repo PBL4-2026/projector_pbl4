@@ -18,6 +18,15 @@ class Image(object):
     # ˄
 
     def load(self, path):
+        """!
+        @brief
+        
+        @param
+        @return
+        @rtype
+        @throws
+        @throws
+        """
         # ˅
         """Load the image at path in BGR (cv2.IMREAD_COLOR) and return it as a numpy.ndarray.
 
@@ -46,12 +55,27 @@ class Image(object):
         # ˄
 
     def getFrame(self):
+        """!
+        @brief
+        
+        @return
+        @rtype
+        """
+
         # ˅
         """Return the loaded frame, or None if load() has not been called yet."""
         return self.__frame
         # ˄
 
     def getShape(self):
+        """!
+        @brief
+        
+        @return
+        @rtype
+        @throws
+        """
+
         # ˅
         """Return (height, width, channels) of the loaded frame.
 
@@ -63,6 +87,12 @@ class Image(object):
         # ˄
 
     def __init__(self):
+        """!
+        @brief
+        
+        @return
+        @rtype
+        """
 
         self.__frame = None
 
@@ -72,6 +102,17 @@ class Image(object):
 
     # ˅
     def setFrame(self, frame):
+        """!
+        @brief
+
+        @param
+
+        @return
+        @rtype
+        
+        @throws
+        """
+
         """Hold an already-built frame (numpy.ndarray) instead of loading one from a file.
 
         Raises ValueError if frame is not a numpy.ndarray.
