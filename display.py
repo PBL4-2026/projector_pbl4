@@ -25,7 +25,7 @@ class Display(object):
         """!
         @brief
 
-        @param
+        @param index: position in screens
 
         @return Nothing
         @rtype None
@@ -46,7 +46,7 @@ class Display(object):
         """!
         @brief
 
-        @param
+        @param enabled: True or False
 
         @return Nothing
         @rtype
@@ -75,6 +75,7 @@ class Display(object):
     def isFullscreen(self):
         """!
         @brief
+        @param None
 
         @return True or False
         @rtype
@@ -89,8 +90,8 @@ class Display(object):
         """!
         @brief
 
-        @param
-        @param
+        @param width [px]
+        @param height [px]
 
         @return NumPy array
         @rtype
@@ -131,7 +132,7 @@ class Display(object):
         """!
         @brief
         
-        @param
+        @param frame: NumPy array
 
         @return Nothing
         @rtype
@@ -168,7 +169,7 @@ class Display(object):
         """!
         @brief
 
-        @param
+        @param delayMs [ms]; 0 waits without limit
 
         @return key code, or -1 if none
         @rtype
@@ -184,7 +185,7 @@ class Display(object):
     def close(self):
         """!
         @brief
-        
+        @param None
         @return Nothing
         @rtype
         """
