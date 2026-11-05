@@ -24,8 +24,8 @@ class Image(object):
         @param
         @return
         @rtype
-        @throws
-        @throws
+        @throws FileNotFoundError if there is no such file.
+        @throws ValueError if the path is empty or the file cannot be read as a picture.
         """
         # ˅
         """Load the image at path in BGR (cv2.IMREAD_COLOR) and return it as a numpy.ndarray.
@@ -60,6 +60,7 @@ class Image(object):
         
         @return
         @rtype
+        @throws none
         """
 
         # ˅
@@ -73,7 +74,7 @@ class Image(object):
         
         @return
         @rtype
-        @throws
+        @throws ValueError if nothing is loaded.
         """
 
         # ˅
@@ -110,7 +111,7 @@ class Image(object):
         @return
         @rtype
         
-        @throws
+        @throws ValueError if frame is not a NumPy array.
         """
 
         """Hold an already-built frame (numpy.ndarray) instead of loading one from a file.
