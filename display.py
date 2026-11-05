@@ -9,6 +9,12 @@ import numpy as np
 class Display(object):
     """!
     @brief Placeholder class in the skeleton; it will open a full-screen window on one chosen screen.
+    Constructor __init__(windowName, screens, screen). Methods setScreen, setFullscreen, isFullscreen, 
+    buildTestImage, show, waitKey, close.
+    The two module functions screenRects(cocoaFrames) and findProjectorScreens(). Say that findProjectorScreens() 
+    works only on macOS. On other systems it returns (None, 0).
+
+
     """
     
     # ˅
@@ -21,9 +27,9 @@ class Display(object):
 
         @param
 
-        @return
-        @rtype
-        
+        @return Nothing
+        @rtype None
+
         @throws
         @throws
         """
@@ -42,7 +48,7 @@ class Display(object):
 
         @param
 
-        @return
+        @return Nothing
         @rtype
 
         @throws
@@ -70,7 +76,7 @@ class Display(object):
         """!
         @brief
 
-        @return
+        @return True or False
         @rtype
         """
         # ˅
@@ -86,7 +92,7 @@ class Display(object):
         @param
         @param
 
-        @return
+        @return NumPy array
         @rtype
         """
         # ˅
@@ -127,7 +133,7 @@ class Display(object):
         
         @param
 
-        @return
+        @return Nothing
         @rtype
 
         @throws
@@ -164,7 +170,7 @@ class Display(object):
 
         @param
 
-        @return
+        @return key code, or -1 if none
         @rtype
         """
         # ˅
@@ -179,7 +185,7 @@ class Display(object):
         """!
         @brief
         
-        @return
+        @return Nothing
         @rtype
         """
 
@@ -199,8 +205,8 @@ class Display(object):
         @param
         @param
         
-        @return
-        @rtype
+        @return Nothing
+        @rtype tuple
         @throws
         @throws
         """
@@ -307,7 +313,7 @@ def screenRects(cocoaFrames):
 
     @param
 
-    @return
+    @return list of (x, y, width, height)
     @rtype
     """
 
@@ -325,7 +331,7 @@ def findProjectorScreens():
     """!
     @brief
 
-    @return
+    @return (screens, index); screens may be None
     @rtype
     """
     
