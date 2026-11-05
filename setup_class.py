@@ -23,7 +23,8 @@ _KEY_SIDE = "projectorSide"
 
 class SetupClass(object):
     """!
-    @brief SetupClass reads settings.json, including which side this computer shows, then validate() checks it.
+    @brief SetupClass reads settings.json, including which side this computer shows, and validates the settings with validate(). The side can be replaced afterwards with setProjectorSide().
+
 
     
     SetupClass stores and checks the user's settings. It does no calculations. 
@@ -89,6 +90,8 @@ class SetupClass(object):
         @return nothing
         @rtype None
         @throws none
+        @return True if all checks pass, False otherwise
+        @rtype bool
         """
 
         # ˅
@@ -204,7 +207,7 @@ class SetupClass(object):
         @rtype Side
         @throws none
         """
-        
+
         # ˅
         return self.__projectorSide
         # ˄
@@ -269,6 +272,16 @@ class SetupClass(object):
         raise ValueError("Setting '%s' must be LEFT or RIGHT (or 1 / 2), got %r" % (_KEY_SIDE, value))
 
     def setProjectorSide(self, side):
+        """!
+        @brief Replaces the side loaded from the file. Used by --side.
+
+        @param side which projector this computer drives, Side.LEFT or Side.RIGHT
+
+        @return nothing
+        @rtype none
+        
+        @throws
+        """
         """Override projectorSide after load(), so both computers can share one settings file.
 
         side: Side.LEFT or Side.RIGHT. Raises ValueError for anything else.
