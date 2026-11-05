@@ -1,0 +1,193 @@
+\doxysection{setup\+\_\+class.\+Setup\+Class Class Reference}
+\hypertarget{classsetup__class_1_1_setup_class}{}\label{classsetup__class_1_1_setup_class}\index{setup\_class.SetupClass@{setup\_class.SetupClass}}
+
+
+\doxylink{classsetup__class_1_1_setup_class}{Setup\+Class} reads settings.\+json, including which side this computer shows, then \doxylink{classsetup__class_1_1_setup_class_aaa0d022c6a6985a5fcb33aa3cea07f47}{validate()} checks it.  
+
+
+Inheritance diagram for setup\+\_\+class.\+Setup\+Class:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classsetup__class_1_1_setup_class}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classsetup__class_1_1_setup_class_ae1a34ef19c27d9f9e901ad45fcd9b805}{load}} (self, path)
+\begin{DoxyCompactList}\small\item\em Reads the settings file (settings.\+json) and fills in all attributes. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classsetup__class_1_1_setup_class_aaa0d022c6a6985a5fcb33aa3cea07f47}{validate}} (self)
+\begin{DoxyCompactList}\small\item\em Checks that the loaded settings are usable. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classsetup__class_1_1_setup_class_af15e35ad47231986750a93d2252093f9}{get\+Projector\+Res\+XY}} (self)
+\begin{DoxyCompactList}\small\item\em Gives the projector resolution. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classsetup__class_1_1_setup_class_a2af0eee43f40f6bd5113c79b2a7d1c52}{get\+Image\+Width\+Cm}} (self)
+\begin{DoxyCompactList}\small\item\em Gives the width of the projected image from one projector \+[cm]. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classsetup__class_1_1_setup_class_aa3d9b771fa97dfe8baf024737318ec4b}{get\+Projector\+Spacing\+Cm}} (self)
+\begin{DoxyCompactList}\small\item\em Gives the spacing between the projectors \+[cm]. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classsetup__class_1_1_setup_class_aa751f77e969f59dcbb97d45aa9097cff}{get\+Blend\+Curve\+Gamma}} (self)
+\begin{DoxyCompactList}\small\item\em Gives the gamma value for the blend curve. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classsetup__class_1_1_setup_class_a171b6771ab58677e2d3384db81fdeae1}{get\+Source\+Path}} (self)
+\begin{DoxyCompactList}\small\item\em Gives the path of the image to display. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classsetup__class_1_1_setup_class_a820c1897c9c9357833d77c3514098e4c}{get\+Projector\+Side}} (self)
+\begin{DoxyCompactList}\small\item\em Gives which projector this computer drives. \end{DoxyCompactList}\item 
+\Hypertarget{classsetup__class_1_1_setup_class_aa003bbde8df69467b985de2ef3b7c351}\label{classsetup__class_1_1_setup_class_aa003bbde8df69467b985de2ef3b7c351} 
+{\bfseries \+\_\+\+\_\+init\+\_\+\_} (self)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classsetup__class_1_1_setup_class}{Setup\+Class} reads settings.\+json, including which side this computer shows, then \doxylink{classsetup__class_1_1_setup_class_aaa0d022c6a6985a5fcb33aa3cea07f47}{validate()} checks it. 
+
+\doxylink{classsetup__class_1_1_setup_class}{Setup\+Class} stores and checks the user\textquotesingle{}s settings. It does no calculations. Its attributes are private (a double underscore in Python) and are read through the getters. 
+
+\label{classsetup__class_1_1_setup_class_doc-func-members}
+\Hypertarget{classsetup__class_1_1_setup_class_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classsetup__class_1_1_setup_class_aa751f77e969f59dcbb97d45aa9097cff}\index{setup\_class.SetupClass@{setup\_class.SetupClass}!getBlendCurveGamma@{getBlendCurveGamma}}
+\index{getBlendCurveGamma@{getBlendCurveGamma}!setup\_class.SetupClass@{setup\_class.SetupClass}}
+\doxysubsubsection{\texorpdfstring{getBlendCurveGamma()}{getBlendCurveGamma()}}
+{\footnotesize\ttfamily \label{classsetup__class_1_1_setup_class_aa751f77e969f59dcbb97d45aa9097cff} 
+setup\+\_\+class.\+Setup\+Class.\+get\+Blend\+Curve\+Gamma (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Gives the gamma value for the blend curve. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float @rtype float 
+\end{DoxyReturn}
+\Hypertarget{classsetup__class_1_1_setup_class_a2af0eee43f40f6bd5113c79b2a7d1c52}\index{setup\_class.SetupClass@{setup\_class.SetupClass}!getImageWidthCm@{getImageWidthCm}}
+\index{getImageWidthCm@{getImageWidthCm}!setup\_class.SetupClass@{setup\_class.SetupClass}}
+\doxysubsubsection{\texorpdfstring{getImageWidthCm()}{getImageWidthCm()}}
+{\footnotesize\ttfamily \label{classsetup__class_1_1_setup_class_a2af0eee43f40f6bd5113c79b2a7d1c52} 
+setup\+\_\+class.\+Setup\+Class.\+get\+Image\+Width\+Cm (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Gives the width of the projected image from one projector \+[cm]. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float \+[cm] @rtype float 
+\end{DoxyReturn}
+\Hypertarget{classsetup__class_1_1_setup_class_af15e35ad47231986750a93d2252093f9}\index{setup\_class.SetupClass@{setup\_class.SetupClass}!getProjectorResXY@{getProjectorResXY}}
+\index{getProjectorResXY@{getProjectorResXY}!setup\_class.SetupClass@{setup\_class.SetupClass}}
+\doxysubsubsection{\texorpdfstring{getProjectorResXY()}{getProjectorResXY()}}
+{\footnotesize\ttfamily \label{classsetup__class_1_1_setup_class_af15e35ad47231986750a93d2252093f9} 
+setup\+\_\+class.\+Setup\+Class.\+get\+Projector\+Res\+XY (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Gives the projector resolution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of two integers \+[px] @rtype list 
+\end{DoxyReturn}
+\Hypertarget{classsetup__class_1_1_setup_class_a820c1897c9c9357833d77c3514098e4c}\index{setup\_class.SetupClass@{setup\_class.SetupClass}!getProjectorSide@{getProjectorSide}}
+\index{getProjectorSide@{getProjectorSide}!setup\_class.SetupClass@{setup\_class.SetupClass}}
+\doxysubsubsection{\texorpdfstring{getProjectorSide()}{getProjectorSide()}}
+{\footnotesize\ttfamily \label{classsetup__class_1_1_setup_class_a820c1897c9c9357833d77c3514098e4c} 
+setup\+\_\+class.\+Setup\+Class.\+get\+Projector\+Side (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Gives which projector this computer drives. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Side @rtype Side 
+\end{DoxyReturn}
+\Hypertarget{classsetup__class_1_1_setup_class_aa3d9b771fa97dfe8baf024737318ec4b}\index{setup\_class.SetupClass@{setup\_class.SetupClass}!getProjectorSpacingCm@{getProjectorSpacingCm}}
+\index{getProjectorSpacingCm@{getProjectorSpacingCm}!setup\_class.SetupClass@{setup\_class.SetupClass}}
+\doxysubsubsection{\texorpdfstring{getProjectorSpacingCm()}{getProjectorSpacingCm()}}
+{\footnotesize\ttfamily \label{classsetup__class_1_1_setup_class_aa3d9b771fa97dfe8baf024737318ec4b} 
+setup\+\_\+class.\+Setup\+Class.\+get\+Projector\+Spacing\+Cm (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Gives the spacing between the projectors \+[cm]. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float \+[cm] @rtype float 
+\end{DoxyReturn}
+\Hypertarget{classsetup__class_1_1_setup_class_a171b6771ab58677e2d3384db81fdeae1}\index{setup\_class.SetupClass@{setup\_class.SetupClass}!getSourcePath@{getSourcePath}}
+\index{getSourcePath@{getSourcePath}!setup\_class.SetupClass@{setup\_class.SetupClass}}
+\doxysubsubsection{\texorpdfstring{getSourcePath()}{getSourcePath()}}
+{\footnotesize\ttfamily \label{classsetup__class_1_1_setup_class_a171b6771ab58677e2d3384db81fdeae1} 
+setup\+\_\+class.\+Setup\+Class.\+get\+Source\+Path (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Gives the path of the image to display. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string @rtype string 
+\end{DoxyReturn}
+\Hypertarget{classsetup__class_1_1_setup_class_ae1a34ef19c27d9f9e901ad45fcd9b805}\index{setup\_class.SetupClass@{setup\_class.SetupClass}!load@{load}}
+\index{load@{load}!setup\_class.SetupClass@{setup\_class.SetupClass}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \label{classsetup__class_1_1_setup_class_ae1a34ef19c27d9f9e901ad45fcd9b805} 
+setup\+\_\+class.\+Setup\+Class.\+load (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Reads the settings file (settings.\+json) and fills in all attributes. 
+
+A missing file or setting should give an error that names the problem
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & location of the file (string) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nothing @rtype None 
+\end{DoxyReturn}
+\Hypertarget{classsetup__class_1_1_setup_class_aaa0d022c6a6985a5fcb33aa3cea07f47}\index{setup\_class.SetupClass@{setup\_class.SetupClass}!validate@{validate}}
+\index{validate@{validate}!setup\_class.SetupClass@{setup\_class.SetupClass}}
+\doxysubsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily \label{classsetup__class_1_1_setup_class_aaa0d022c6a6985a5fcb33aa3cea07f47} 
+setup\+\_\+class.\+Setup\+Class.\+validate (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+
+
+Checks that the loaded settings are usable. 
+
+The exact checks are being finalised, for example positive numbers and an existing source file. Call it after \doxylink{classsetup__class_1_1_setup_class_ae1a34ef19c27d9f9e901ad45fcd9b805}{load()} and before using any setting
+
+\begin{DoxyReturn}{Returns}
+nothing @rtype None 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/setup\+\_\+class.\+py\end{DoxyCompactItemize}

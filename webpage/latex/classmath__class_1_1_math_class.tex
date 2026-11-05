@@ -1,0 +1,179 @@
+\doxysection{math\+\_\+class.\+Math\+Class Class Reference}
+\hypertarget{classmath__class_1_1_math_class}{}\label{classmath__class_1_1_math_class}\index{math\_class.MathClass@{math\_class.MathClass}}
+
+
+Provides calculations for dual-\/projector image projection.  
+
+
+Inheritance diagram for math\+\_\+class.\+Math\+Class:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmath__class_1_1_math_class}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classmath__class_1_1_math_class_af36b12affe8b25b3b804dd3c50f9ef2b}{overlap\+Cm}} (cls, w, d)
+\begin{DoxyCompactList}\small\item\em Calculates the overlapped width between the two both projectors. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmath__class_1_1_math_class_a5b08aba2bb672b2eefea5ff32900cfd9}{total\+Width\+Cm}} (cls, w, d)
+\begin{DoxyCompactList}\small\item\em Calculates the total width covered by both projectors. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmath__class_1_1_math_class_aeeb4d60b5502a466dc22a15ae97830b0}{px\+Per\+Cm}} (cls, resX, w)
+\begin{DoxyCompactList}\small\item\em Calculates the horizontal pixel density of a projector. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmath__class_1_1_math_class_a4d20eb59a156ad5984187f5bb44bb144}{overlap\+Px}} (cls, resX, w, d)
+\begin{DoxyCompactList}\small\item\em Calculates the overlap width in whole pixels. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmath__class_1_1_math_class_ab2d0360fd550fa2490f64571cb3a8840}{crop\+Region}} (cls, projector\+Side, resX, w, d)
+\begin{DoxyCompactList}\small\item\em Determines which region of the combined image a projector displays. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{classmath__class_1_1_math_class_a324f6d49d9929b6daf04323dd9340a0e}{blend\+Mask}} (cls, overlap\+Px, resX, projector\+Side, gamma)
+\begin{DoxyCompactList}\small\item\em Creates a blending mask for one projector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides calculations for dual-\/projector image projection. 
+
+Calculates overlap width, combined projection width, pixel density, image regions, and blending masks. 
+
+\label{classmath__class_1_1_math_class_doc-func-members}
+\Hypertarget{classmath__class_1_1_math_class_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmath__class_1_1_math_class_a324f6d49d9929b6daf04323dd9340a0e}\index{math\_class.MathClass@{math\_class.MathClass}!blendMask@{blendMask}}
+\index{blendMask@{blendMask}!math\_class.MathClass@{math\_class.MathClass}}
+\doxysubsubsection{\texorpdfstring{blendMask()}{blendMask()}}
+{\footnotesize\ttfamily \label{classmath__class_1_1_math_class_a324f6d49d9929b6daf04323dd9340a0e} 
+math\+\_\+class.\+Math\+Class.\+blend\+Mask (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{}]{overlap\+Px}{, }\item[{}]{resX}{, }\item[{}]{projector\+Side}{, }\item[{}]{gamma}{}\end{DoxyParamCaption})}
+
+
+
+Creates a blending mask for one projector. 
+
+The mask maintains full brightness outside the overlap and fades brightness within the overlap. Gamma controls the shape of the fade.
+
+
+\begin{DoxyParams}{Parameters}
+{\em overlap\+Px} & Width of the overlap region in whole pixels \+[px]. \\
+\hline
+{\em resX} & Horizontal resolution of one projector \+[px]. \\
+\hline
+{\em projector\+Side} & Side of the projector, LEFT or RIGHT. \\
+\hline
+{\em gamma} & Value controlling the shape of the fade. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Blending mask containing brightness multipliers from 0 to 1. @rtype \doxylink{classmask_1_1_mask}{Mask} 
+\end{DoxyReturn}
+\Hypertarget{classmath__class_1_1_math_class_ab2d0360fd550fa2490f64571cb3a8840}\index{math\_class.MathClass@{math\_class.MathClass}!cropRegion@{cropRegion}}
+\index{cropRegion@{cropRegion}!math\_class.MathClass@{math\_class.MathClass}}
+\doxysubsubsection{\texorpdfstring{cropRegion()}{cropRegion()}}
+{\footnotesize\ttfamily \label{classmath__class_1_1_math_class_ab2d0360fd550fa2490f64571cb3a8840} 
+math\+\_\+class.\+Math\+Class.\+crop\+Region (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{}]{projector\+Side}{, }\item[{}]{resX}{, }\item[{}]{w}{, }\item[{}]{d}{}\end{DoxyParamCaption})}
+
+
+
+Determines which region of the combined image a projector displays. 
+
+The LEFT and RIGHT projector regions together cover the combined image.
+
+
+\begin{DoxyParams}{Parameters}
+{\em projector\+Side} & Side of the projector, LEFT or RIGHT. \\
+\hline
+{\em resX} & Horizontal resolution of one projector \+[px]. \\
+\hline
+{\em w} & Width of the image projected by one projector \+[cm]. \\
+\hline
+{\em d} & Distance between the two projectors \+[cm]. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classregion_1_1_region}{Region} of the combined image displayed by this projector. @rtype \doxylink{classregion_1_1_region}{Region} 
+\end{DoxyReturn}
+\Hypertarget{classmath__class_1_1_math_class_af36b12affe8b25b3b804dd3c50f9ef2b}\index{math\_class.MathClass@{math\_class.MathClass}!overlapCm@{overlapCm}}
+\index{overlapCm@{overlapCm}!math\_class.MathClass@{math\_class.MathClass}}
+\doxysubsubsection{\texorpdfstring{overlapCm()}{overlapCm()}}
+{\footnotesize\ttfamily \label{classmath__class_1_1_math_class_af36b12affe8b25b3b804dd3c50f9ef2b} 
+math\+\_\+class.\+Math\+Class.\+overlap\+Cm (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{}]{w}{, }\item[{}]{d}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the overlapped width between the two both projectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & Width of the projected image from one projector \+[cm] \\
+\hline
+{\em d} & Distance between the two projectors \+[cm] \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Width of the overlapping screen regions \+[cm] @rtype float 
+\end{DoxyReturn}
+\Hypertarget{classmath__class_1_1_math_class_a4d20eb59a156ad5984187f5bb44bb144}\index{math\_class.MathClass@{math\_class.MathClass}!overlapPx@{overlapPx}}
+\index{overlapPx@{overlapPx}!math\_class.MathClass@{math\_class.MathClass}}
+\doxysubsubsection{\texorpdfstring{overlapPx()}{overlapPx()}}
+{\footnotesize\ttfamily \label{classmath__class_1_1_math_class_a4d20eb59a156ad5984187f5bb44bb144} 
+math\+\_\+class.\+Math\+Class.\+overlap\+Px (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{}]{resX}{, }\item[{}]{w}{, }\item[{}]{d}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the overlap width in whole pixels. 
+
+Both computers must use the same overlap pixel value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em resX} & Horizontal resolution of one projector \+[px]. \\
+\hline
+{\em w} & Width of the image projected by one projector \+[cm]. \\
+\hline
+{\em d} & Distance between the two projectors \+[cm]. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Width of the overlap region in whole pixels \+[px]. @rtype int 
+\end{DoxyReturn}
+\Hypertarget{classmath__class_1_1_math_class_aeeb4d60b5502a466dc22a15ae97830b0}\index{math\_class.MathClass@{math\_class.MathClass}!pxPerCm@{pxPerCm}}
+\index{pxPerCm@{pxPerCm}!math\_class.MathClass@{math\_class.MathClass}}
+\doxysubsubsection{\texorpdfstring{pxPerCm()}{pxPerCm()}}
+{\footnotesize\ttfamily \label{classmath__class_1_1_math_class_aeeb4d60b5502a466dc22a15ae97830b0} 
+math\+\_\+class.\+Math\+Class.\+px\+Per\+Cm (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{}]{resX}{, }\item[{}]{w}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the horizontal pixel density of a projector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em resX} & Horizontal resolution of one projector \+[px]. \\
+\hline
+{\em w} & Width of the image projected by one projector \+[cm]. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Horizontal pixel density \+[px/\+cm]. @rtype float 
+\end{DoxyReturn}
+\Hypertarget{classmath__class_1_1_math_class_a5b08aba2bb672b2eefea5ff32900cfd9}\index{math\_class.MathClass@{math\_class.MathClass}!totalWidthCm@{totalWidthCm}}
+\index{totalWidthCm@{totalWidthCm}!math\_class.MathClass@{math\_class.MathClass}}
+\doxysubsubsection{\texorpdfstring{totalWidthCm()}{totalWidthCm()}}
+{\footnotesize\ttfamily \label{classmath__class_1_1_math_class_a5b08aba2bb672b2eefea5ff32900cfd9} 
+math\+\_\+class.\+Math\+Class.\+total\+Width\+Cm (\begin{DoxyParamCaption}\item[{}]{cls}{, }\item[{}]{w}{, }\item[{}]{d}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the total width covered by both projectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & Width of the image projected by one projector \+[cm]. \\
+\hline
+{\em d} & Distance between the two projectors \+[cm]. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Total width of the combined projection \+[cm]. @rtype float 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/math\+\_\+class.\+py\end{DoxyCompactItemize}

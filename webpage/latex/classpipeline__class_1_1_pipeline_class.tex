@@ -1,0 +1,123 @@
+\doxysection{pipeline\+\_\+class.\+Pipeline\+Class Class Reference}
+\hypertarget{classpipeline__class_1_1_pipeline_class}{}\label{classpipeline__class_1_1_pipeline_class}\index{pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}}
+Inheritance diagram for pipeline\+\_\+class.\+Pipeline\+Class:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classpipeline__class_1_1_pipeline_class}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classpipeline__class_1_1_pipeline_class_ad5bbcdf15ab710b78ca7f0ede3e34acf}{load}} (self)
+\item 
+\doxymbox{\hyperlink{classpipeline__class_1_1_pipeline_class_ac15c39cea8bda1ba893c62954fe55ad0}{crop}} (self)
+\item 
+\doxymbox{\hyperlink{classpipeline__class_1_1_pipeline_class_ac5c6dc2ee64d9b9223ca6003150b6dc8}{apply\+Mask}} (self, slice\+Frame)
+\item 
+\doxymbox{\hyperlink{classpipeline__class_1_1_pipeline_class_a1fcd5e07ad8d26d5a75ec4efd8b280c6}{display}} (self, frame)
+\item 
+\doxymbox{\hyperlink{classpipeline__class_1_1_pipeline_class_ae575c07bf9f684dc03be84fff6a7d84c}{run}} (self)
+\item 
+\doxymbox{\hyperlink{classpipeline__class_1_1_pipeline_class_a0faaf6981a5fc89514ac439be2733282}{scale\+Source}} (self)
+\item 
+\doxymbox{\hyperlink{classpipeline__class_1_1_pipeline_class_a27e5c0f1c432a57d43ba316d5c93311a}{\+\_\+\+\_\+init\+\_\+\_}} (self)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@brief Processes an image for dual-projector display.
+
+Loads the source image, scales it, crops the region for
+this projector, applies a blending mask, and displays the result.
+\end{DoxyVerb}
+ 
+
+\label{classpipeline__class_1_1_pipeline_class_doc-constructors}
+\Hypertarget{classpipeline__class_1_1_pipeline_class_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classpipeline__class_1_1_pipeline_class_a27e5c0f1c432a57d43ba316d5c93311a}\index{pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classpipeline__class_1_1_pipeline_class_a27e5c0f1c432a57d43ba316d5c93311a} 
+pipeline\+\_\+class.\+Pipeline\+Class.\+\_\+\+\_\+init\+\_\+\_ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Initializes the pipeline attributes.
+\end{DoxyVerb}
+ 
+
+\label{classpipeline__class_1_1_pipeline_class_doc-func-members}
+\Hypertarget{classpipeline__class_1_1_pipeline_class_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classpipeline__class_1_1_pipeline_class_ac5c6dc2ee64d9b9223ca6003150b6dc8}\index{pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}!applyMask@{applyMask}}
+\index{applyMask@{applyMask}!pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}}
+\doxysubsubsection{\texorpdfstring{applyMask()}{applyMask()}}
+{\footnotesize\ttfamily \label{classpipeline__class_1_1_pipeline_class_ac5c6dc2ee64d9b9223ca6003150b6dc8} 
+pipeline\+\_\+class.\+Pipeline\+Class.\+apply\+Mask (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{slice\+Frame}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Applies the blending mask to the cropped image.
+
+@param sliceFrame Image slice produced by crop().
+@return Image with the blending mask applied.
+\end{DoxyVerb}
+ \Hypertarget{classpipeline__class_1_1_pipeline_class_ac15c39cea8bda1ba893c62954fe55ad0}\index{pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}!crop@{crop}}
+\index{crop@{crop}!pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}}
+\doxysubsubsection{\texorpdfstring{crop()}{crop()}}
+{\footnotesize\ttfamily \label{classpipeline__class_1_1_pipeline_class_ac15c39cea8bda1ba893c62954fe55ad0} 
+pipeline\+\_\+class.\+Pipeline\+Class.\+crop (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Crops the part of the scaled image for this projector.
+
+@return Image slice for this projector.
+\end{DoxyVerb}
+ \Hypertarget{classpipeline__class_1_1_pipeline_class_a1fcd5e07ad8d26d5a75ec4efd8b280c6}\index{pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}!display@{display}}
+\index{display@{display}!pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily \label{classpipeline__class_1_1_pipeline_class_a1fcd5e07ad8d26d5a75ec4efd8b280c6} 
+pipeline\+\_\+class.\+Pipeline\+Class.\+display (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{frame}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Displays the processed image on this projector.
+
+@param frame Image to display.
+@return None
+\end{DoxyVerb}
+ \Hypertarget{classpipeline__class_1_1_pipeline_class_ad5bbcdf15ab710b78ca7f0ede3e34acf}\index{pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}!load@{load}}
+\index{load@{load}!pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \label{classpipeline__class_1_1_pipeline_class_ad5bbcdf15ab710b78ca7f0ede3e34acf} 
+pipeline\+\_\+class.\+Pipeline\+Class.\+load (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Loads the source image using the path in the settings.
+
+@return None
+\end{DoxyVerb}
+ \Hypertarget{classpipeline__class_1_1_pipeline_class_ae575c07bf9f684dc03be84fff6a7d84c}\index{pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}!run@{run}}
+\index{run@{run}!pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{classpipeline__class_1_1_pipeline_class_ae575c07bf9f684dc03be84fff6a7d84c} 
+pipeline\+\_\+class.\+Pipeline\+Class.\+run (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Runs the image-processing steps in order.
+
+Loads, scales, crops, applies the mask, and displays the image.
+Video support is optional; still images are required.
+
+@return None
+\end{DoxyVerb}
+ \Hypertarget{classpipeline__class_1_1_pipeline_class_a0faaf6981a5fc89514ac439be2733282}\index{pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}!scaleSource@{scaleSource}}
+\index{scaleSource@{scaleSource}!pipeline\_class.PipelineClass@{pipeline\_class.PipelineClass}}
+\doxysubsubsection{\texorpdfstring{scaleSource()}{scaleSource()}}
+{\footnotesize\ttfamily \label{classpipeline__class_1_1_pipeline_class_a0faaf6981a5fc89514ac439be2733282} 
+pipeline\+\_\+class.\+Pipeline\+Class.\+scale\+Source (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Resizes the source image to cover both projectors.
+
+The exact scaling method is still to be decided.
+
+@return None for now.
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+src/pipeline\+\_\+class.\+py\end{DoxyCompactItemize}
