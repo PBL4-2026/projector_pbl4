@@ -23,7 +23,8 @@ _KEY_SIDE = "projectorSide"
 
 class SetupClass(object):
     """!
-    @brief SetupClass reads settings.json, including which side this computer shows, then validate() checks it.
+    @brief SetupClass reads settings.json, including which side this computer shows, and validates the settings with validate(). The side can be replaced afterwards with setProjectorSide().
+
 
     
     SetupClass stores and checks the user's settings. It does no calculations. 
@@ -83,8 +84,8 @@ class SetupClass(object):
         """!
         @brief Checks that the loaded settings are usable. The exact checks are being finalised, for example positive numbers and an existing source file. Call it after load() and before using any setting
 
-        @return nothing
-        @rtype None
+        @return True if all checks pass, False otherwise
+        @rtype bool
         """
 
         # ˅
@@ -260,12 +261,12 @@ class SetupClass(object):
 
     def setProjectorSide(self, side):
         """!
-        @brief
+        @brief Replaces the side loaded from the file. Used by --side.
 
-        @param
+        @param side which projector this computer drives, Side.LEFT or Side.RIGHT
 
-        @return
-        @rtype
+        @return nothing
+        @rtype none
         
         @throws
         """
