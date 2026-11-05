@@ -16,6 +16,17 @@ class Display(object):
     # ˄
 
     def setScreen(self, index):
+        """!
+        @brief
+
+        @param
+
+        @return
+        @rtype
+        
+        @throws
+        @throws
+        """
         # ˅
         """Select the target monitor by index and remember that number.
 
@@ -26,6 +37,16 @@ class Display(object):
         # ˄
 
     def setFullscreen(self, enabled=True):
+        """!
+        @brief
+
+        @param
+
+        @return
+        @rtype
+
+        @throws
+        """
         # ˅
         """Set the desired fullscreen state and apply it immediately if a window exists.
 
@@ -46,6 +67,12 @@ class Display(object):
         # ˄
 
     def isFullscreen(self):
+        """!
+        @brief
+
+        @return
+        @rtype
+        """
         # ˅
         """Return the desired fullscreen state."""
         return self.__fullscreen
@@ -53,6 +80,15 @@ class Display(object):
 
     @staticmethod
     def buildTestImage(width=1280, height=720):
+        """!
+        @brief
+
+        @param
+        @param
+
+        @return
+        @rtype
+        """
         # ˅
         """Build a test frame (BGR) with colour bars, a checker pattern and text.
 
@@ -86,6 +122,16 @@ class Display(object):
         # ˄
 
     def show(self, frame):
+        """!
+        @brief
+        
+        @param
+
+        @return
+        @rtype
+
+        @throws
+        """
         # ˅
         """Show a frame in the window. The first call creates the window.
 
@@ -113,6 +159,14 @@ class Display(object):
         # ˄
 
     def waitKey(self, delayMs=0):
+        """!
+        @brief
+
+        @param
+
+        @return
+        @rtype
+        """
         # ˅
         """Wait delayMs milliseconds for a key press and return the key code (-1 if none).
 
@@ -122,6 +176,13 @@ class Display(object):
         # ˄
 
     def close(self):
+        """!
+        @brief
+        
+        @return
+        @rtype
+        """
+
         # ˅
         """Destroy the window. Does nothing if there is no window or on calls after the first."""
         if not self.__windowOpen:
@@ -131,6 +192,18 @@ class Display(object):
         # ˄
 
     def __init__(self, windowName="projector", screens=None, screen=0):
+        """!
+        @brief
+        
+        @param
+        @param
+        @param
+        
+        @return
+        @rtype
+        @throws
+        @throws
+        """
 
         self.__windowOpen = None
 
@@ -229,6 +302,15 @@ class Display(object):
 
 # ˅
 def screenRects(cocoaFrames):
+    """!
+    @brief
+
+    @param
+
+    @return
+    @rtype
+    """
+
     """Convert macOS screen frames to (x, y, width, height) with the origin at the top left.
 
     cocoaFrames: [(x, y, width, height), ...] in macOS coordinates (origin at the bottom
@@ -240,6 +322,13 @@ def screenRects(cocoaFrames):
 
 
 def findProjectorScreens():
+    """!
+    @brief
+
+    @return
+    @rtype
+    """
+    
     """Return (screens, index): the connected screens and the one to use for the projector.
 
     The projector is the first screen that is not the primary one. With a single screen,
