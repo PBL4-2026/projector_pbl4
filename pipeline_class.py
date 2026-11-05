@@ -38,6 +38,9 @@ class PipelineClass(object):
 
         @throws
         @throws
+        @return None
+        @throws FileNotFoundError if the path is wrong. 
+        @throws ValueError if the file is not a readable picture.
         """
         
         # ˅
@@ -57,6 +60,8 @@ class PipelineClass(object):
         @rtype Image
 
         @throws
+        @return Image slice for this projector.
+        @throws ValueError if there is no source, or the region does not fit.
         """
 
         # ˅
@@ -100,6 +105,8 @@ class PipelineClass(object):
         @rtype image
 
         @throws
+        @return Image with the blending mask applied.
+        @throws ValueError if there is no mask, or the slice width is not resX.
         """
 
         # ˅
@@ -129,6 +136,7 @@ class PipelineClass(object):
         @rtype
 
         @throws
+        @throws ValueError if frame is not an Image or is empty.
         """
 
         # ˅
@@ -167,6 +175,7 @@ class PipelineClass(object):
 
         @throws
         @throws
+        @throws Whatever the steps raise.
         """
 
         # ˅
@@ -228,6 +237,8 @@ class PipelineClass(object):
         @rtype
 
         @throws
+        @brief Initializes the pipeline attributes.
+        @throws ValueError if setup is missing or not loaded.
         """
 
         self.__setup = None
