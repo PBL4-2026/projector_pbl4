@@ -18,6 +18,15 @@ class Image(object):
     # ˄
 
     def load(self, path):
+        """!
+        @brief Reads the file at path as a colour picture and keeps it inside the object.
+        
+        @param path location of the picture (string)
+        @return the frame (NumPy array)
+        @rtype numpy.ndarray
+        @throws
+        @throws
+        """
         # ˅
         """Load the image at path in BGR (cv2.IMREAD_COLOR) and return it as a numpy.ndarray.
 
@@ -46,12 +55,27 @@ class Image(object):
         # ˄
 
     def getFrame(self):
+        """!
+        @brief Gives the picture data.
+        
+        @return the frame, or None if nothing is loaded
+        @rtype numpy.ndarray
+        """
+
         # ˅
         """Return the loaded frame, or None if load() has not been called yet."""
         return self.__frame
         # ˄
 
     def getShape(self):
+        """!
+        @brief Gives the picture size.
+        
+        @return (height, width, channels)
+        @rtype tuple
+        @throws
+        """
+
         # ˅
         """Return (height, width, channels) of the loaded frame.
 
@@ -72,6 +96,17 @@ class Image(object):
 
     # ˅
     def setFrame(self, frame):
+        """!
+        @brief Puts new picture data into the object. Used for the results of scaling, cropping and masking.
+
+        @param frame the new picture data (NumPy array)
+
+        @return nothing
+        @rtype none
+        
+        @throws
+        """
+
         """Hold an already-built frame (numpy.ndarray) instead of loading one from a file.
 
         Raises ValueError if frame is not a numpy.ndarray.
