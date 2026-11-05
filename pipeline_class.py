@@ -33,10 +33,16 @@ class PipelineClass(object):
         """!
         @brief Loads the source image using the path in the settings.
 
+        @Returns the loaded Image.
+        @rtype
+
+        @throws
+        @throws
         @return None
         @throws FileNotFoundError if the path is wrong. 
         @throws ValueError if the file is not a readable picture.
         """
+        
         # ˅
         # Image.load() raises FileNotFoundError / ValueError naming the path.
         path = self.__setup.getSourcePath()
@@ -50,6 +56,10 @@ class PipelineClass(object):
         """!
         @brief Crops the part of the scaled image for this projector.
 
+        @return  a copy. applyMask() .
+        @rtype Image
+
+        @throws
         @return Image slice for this projector.
         @throws ValueError if there is no source, or the region does not fit.
         """
@@ -90,6 +100,11 @@ class PipelineClass(object):
         @brief Applies the blending mask to the cropped image.
 
         @param sliceFrame Image slice produced by crop().
+
+        @return a new Image and does not change its input.
+        @rtype image
+
+        @throws
         @return Image with the blending mask applied.
         @throws ValueError if there is no mask, or the slice width is not resX.
         """
@@ -113,10 +128,14 @@ class PipelineClass(object):
 
     def display(self, frame):
         """!
-        @brief Displays the processed image on this projector.
+        @brief Opens a full-screen window on the second screen if there is one (otherwise the only screen),
+         waits for a key press, then closes it. 
 
         @param frame Image to display.
         @return None
+        @rtype
+
+        @throws
         @throws ValueError if frame is not an Image or is empty.
         """
 
@@ -148,9 +167,14 @@ class PipelineClass(object):
         @brief Runs the image-processing steps in order.
 
         Loads, scales, crops, applies the mask, and displays the image.
-        Video support is optional; still images are required.
+        the mask and the region are built once, and that each computer shows one side.
+        Still pictures only. Video is not supported.still images are required.
 
         @return None
+        @rtype None
+
+        @throws
+        @throws
         @throws Whatever the steps raise.
         """
 
@@ -166,9 +190,11 @@ class PipelineClass(object):
         """!
         @brief Resizes the source image to cover both projectors.
 
-        The exact scaling method is still to be decided.
+        @Returns the scaled Image. It keeps the aspect ratio and cuts the extra edges 
+        from the centre (“crop to fill”). It never stretches the picture. It writes an INFO message when it crops. 
+        @rtype Image
 
-        @return None for now.
+        @throws
         """
 
         # ˅
@@ -202,6 +228,15 @@ class PipelineClass(object):
 
     def __init__(self, setup):
         """!
+        @brief Takes setup (a loaded SetupClass). Builds the math object, 
+        the region and the mask once. Add @param setup.
+        
+        @param
+        
+        @return
+        @rtype
+
+        @throws
         @brief Initializes the pipeline attributes.
         @throws ValueError if setup is missing or not loaded.
         """
