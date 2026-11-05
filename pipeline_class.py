@@ -33,7 +33,7 @@ class PipelineClass(object):
         """!
         @brief Loads the source image using the path in the settings.
 
-        @return None
+        @Returns the loaded Image.
         @rtype
 
         @throws
@@ -53,8 +53,8 @@ class PipelineClass(object):
         """!
         @brief Crops the part of the scaled image for this projector.
 
-        @return Image slice for this projector.
-        @rtype
+        @return  a copy. applyMask() .
+        @rtype Image
 
         @throws
         """
@@ -96,8 +96,8 @@ class PipelineClass(object):
 
         @param sliceFrame Image slice produced by crop().
 
-        @return Image with the blending mask applied.
-        @rtype
+        @return a new Image and does not change its input.
+        @rtype image
 
         @throws
         """
@@ -121,7 +121,8 @@ class PipelineClass(object):
 
     def display(self, frame):
         """!
-        @brief Displays the processed image on this projector.
+        @brief Opens a full-screen window on the second screen if there is one (otherwise the only screen),
+         waits for a key press, then closes it. 
 
         @param frame Image to display.
         @return None
@@ -158,10 +159,11 @@ class PipelineClass(object):
         @brief Runs the image-processing steps in order.
 
         Loads, scales, crops, applies the mask, and displays the image.
-        Video support is optional; still images are required.
+        the mask and the region are built once, and that each computer shows one side.
+        Still pictures only. Video is not supported.still images are required.
 
         @return None
-        @rtype
+        @rtype None
 
         @throws
         @throws
@@ -179,10 +181,9 @@ class PipelineClass(object):
         """!
         @brief Resizes the source image to cover both projectors.
 
-        The exact scaling method is still to be decided.
-
-        @return None for now.
-        @rtype
+        @Returns the scaled Image. It keeps the aspect ratio and cuts the extra edges 
+        from the centre (“crop to fill”). It never stretches the picture. It writes an INFO message when it crops. 
+        @rtype Image
 
         @throws
         """
@@ -218,7 +219,8 @@ class PipelineClass(object):
 
     def __init__(self, setup):
         """!
-        @brief Initializes the pipeline attributes.
+        @brief Takes setup (a loaded SetupClass). Builds the math object, 
+        the region and the mask once. Add @param setup.
         
         @param
         
