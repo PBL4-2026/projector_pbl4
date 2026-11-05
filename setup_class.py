@@ -194,7 +194,7 @@ class SetupClass(object):
         @return Side
         @rtype Side
         """
-        
+
         # ˅
         return self.__projectorSide
         # ˄
@@ -259,6 +259,16 @@ class SetupClass(object):
         raise ValueError("Setting '%s' must be LEFT or RIGHT (or 1 / 2), got %r" % (_KEY_SIDE, value))
 
     def setProjectorSide(self, side):
+        """!
+        @brief
+
+        @param
+
+        @return
+        @rtype
+        
+        @throws
+        """
         """Override projectorSide after load(), so both computers can share one settings file.
 
         side: Side.LEFT or Side.RIGHT. Raises ValueError for anything else.
