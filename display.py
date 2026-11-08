@@ -7,32 +7,11 @@ import numpy as np
 
 
 class Display(object):
-    """!
-    @brief Placeholder class in the skeleton; it will open a full-screen window on one chosen screen.
-    Constructor __init__(windowName, screens, screen). Methods setScreen, setFullscreen, isFullscreen, 
-    buildTestImage, show, waitKey, close.
-    The two module functions screenRects(cocoaFrames) and findProjectorScreens(). Say that findProjectorScreens() 
-    works only on macOS. On other systems it returns (None, 0).
-
-
-    """
-    
     # ˅
     
     # ˄
 
     def setScreen(self, index):
-        """!
-        @brief
-
-        @param index: position in screens
-
-        @return Nothing
-        @rtype None
-
-        @throws
-        @throws
-        """
         # ˅
         """Select the target monitor by index and remember that number.
 
@@ -43,16 +22,6 @@ class Display(object):
         # ˄
 
     def setFullscreen(self, enabled=True):
-        """!
-        @brief
-
-        @param enabled: True or False
-
-        @return Nothing
-        @rtype
-
-        @throws
-        """
         # ˅
         """Set the desired fullscreen state and apply it immediately if a window exists.
 
@@ -73,13 +42,6 @@ class Display(object):
         # ˄
 
     def isFullscreen(self):
-        """!
-        @brief
-        @param None
-
-        @return True or False
-        @rtype
-        """
         # ˅
         """Return the desired fullscreen state."""
         return self.__fullscreen
@@ -87,15 +49,6 @@ class Display(object):
 
     @staticmethod
     def buildTestImage(width=1280, height=720):
-        """!
-        @brief
-
-        @param width [px]
-        @param height [px]
-
-        @return NumPy array
-        @rtype
-        """
         # ˅
         """Build a test frame (BGR) with colour bars, a checker pattern and text.
 
@@ -129,16 +82,6 @@ class Display(object):
         # ˄
 
     def show(self, frame):
-        """!
-        @brief
-        
-        @param frame: NumPy array
-
-        @return Nothing
-        @rtype
-
-        @throws
-        """
         # ˅
         """Show a frame in the window. The first call creates the window.
 
@@ -166,14 +109,6 @@ class Display(object):
         # ˄
 
     def waitKey(self, delayMs=0):
-        """!
-        @brief
-
-        @param delayMs [ms]; 0 waits without limit
-
-        @return key code, or -1 if none
-        @rtype
-        """
         # ˅
         """Wait delayMs milliseconds for a key press and return the key code (-1 if none).
 
@@ -183,13 +118,6 @@ class Display(object):
         # ˄
 
     def close(self):
-        """!
-        @brief
-        @param None
-        @return Nothing
-        @rtype
-        """
-
         # ˅
         """Destroy the window. Does nothing if there is no window or on calls after the first."""
         if not self.__windowOpen:
@@ -199,18 +127,6 @@ class Display(object):
         # ˄
 
     def __init__(self, windowName="projector", screens=None, screen=0):
-        """!
-        @brief
-        
-        @param
-        @param
-        @param
-        
-        @return Nothing
-        @rtype tuple
-        @throws
-        @throws
-        """
 
         self.__windowOpen = None
 
@@ -309,15 +225,6 @@ class Display(object):
 
 # ˅
 def screenRects(cocoaFrames):
-    """!
-    @brief
-
-    @param
-
-    @return list of (x, y, width, height)
-    @rtype
-    """
-
     """Convert macOS screen frames to (x, y, width, height) with the origin at the top left.
 
     cocoaFrames: [(x, y, width, height), ...] in macOS coordinates (origin at the bottom
@@ -329,13 +236,6 @@ def screenRects(cocoaFrames):
 
 
 def findProjectorScreens():
-    """!
-    @brief
-
-    @return (screens, index); screens may be None
-    @rtype
-    """
-    
     """Return (screens, index): the connected screens and the one to use for the projector.
 
     The projector is the first screen that is not the primary one. With a single screen,
